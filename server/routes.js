@@ -17,6 +17,7 @@ const AVATAR = '/avatar';
 
 //DIARY
 const API_DIARY = '/api/diary'; //get, post, patch
+const COUNT = "/count";
 
 const routes = {
   root:ROOT,
@@ -26,7 +27,8 @@ const routes = {
   apiUser : API_USER,
   me:ME,
   avatar: AVATAR,
-  apiDiary: API_DIARY
+  apiDiary: API_DIARY,
+  count : COUNT
 };
 
 export default routes;

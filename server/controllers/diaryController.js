@@ -1,9 +1,5 @@
 import { connection } from '../db';
 const dbConnection = connection();
-  getDiary,
-  postDiary,
-  patchDiary,
-  deleteDiary
 
 export const getDiary = async(req, res)=>{
 
@@ -41,7 +37,7 @@ export const postDiary = async (req, res) => {
   }
 };
 
-export const postMoodCount = async (req, res) => {
+export const getCount = async (req, res) => {
   const {
     body: { date, type },
     session: { displayName }
