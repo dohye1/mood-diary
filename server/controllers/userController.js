@@ -1,12 +1,11 @@
-import { connection } from '../db';
+
 import bcrypt from 'bcryptjs';
-const dbConnection = connection();
 let sql;
 
 export const getMe = async ()=>{
 }
 export const postUser = async (req, res) => {
-  const {
+  /*const {
     body: {
       data: { email, password, nickname }
     }
@@ -24,11 +23,11 @@ export const postUser = async (req, res) => {
   } catch (error) {
     console.log(error);
     return res.send({ register: 'fail', registerType: 'fail' });
-  }
+  }*/
 };
 
 export const patchMe = (req, res) => {
-  const {
+  /*const {
     body: { Nickname, Promise },
     session: { displayName }
   } = req;
@@ -44,11 +43,11 @@ export const patchMe = (req, res) => {
     });
   } catch (error) {
     console.log(error);
-  }
+  }*/
 };
 
 export const postAvatar = (req, res) => {
-  try {
+  /*try {
     const file = req.file;
     let avatarAdd;
     let email;
@@ -77,5 +76,5 @@ export const postAvatar = (req, res) => {
     });
   } catch (error) {
     console.log(error);
-  }
+  }*/
 };

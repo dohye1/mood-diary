@@ -1,10 +1,8 @@
-import { connection } from '../db';
 import bcrypt from 'bcryptjs';
-const dbConnection = connection();
 let sql;
 
 export const postLogin = async (req, res) => {
-  const {
+  /*const {
     body: {
       data: { email, password }
     }
@@ -44,13 +42,13 @@ export const postLogin = async (req, res) => {
   } catch (error) {
     console.log(error);
     return res.send({ login: 'fail' });
-  }
+  }*/
 };
 
 export const getLogout = (req, res) => {
-  req.session.destroy(function () {
+ /* req.session.destroy(function () {
     req.session; // db에있는 session이 지워짐
   });
   res.clearCookie('connect'); // 브라우저에있는 쿠키 세션이 지워짐
-  return res.status(200).send({ logout: 'success' });
+  return res.status(200).send({ logout: 'success' });*/
 };

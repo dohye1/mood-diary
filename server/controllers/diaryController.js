@@ -1,5 +1,3 @@
-import { connection } from '../db';
-const dbConnection = connection();
 
 export const getDiary = async(req, res)=>{
 
@@ -14,7 +12,7 @@ export const deleteDiary = async(req, res)=>{
 }
 
 export const postDiary = async (req, res) => {
-  const {
+  /*const {
     body: { date, mood, content },
     session: { displayName }
   } = req;
@@ -34,11 +32,11 @@ export const postDiary = async (req, res) => {
   } catch (error) {
     console.error(error);
     return res.send({ diaryUpload: false });
-  }
+  }*/
 };
 
 export const getCount = async (req, res) => {
-  const {
+  /*const {
     body: { date, type },
     session: { displayName }
   } = req;
@@ -68,12 +66,12 @@ export const getCount = async (req, res) => {
     }
   } catch (error) {
     console.error(error);
-  }
+  }*/
 };
 
 
 export const postEdit = (req, res) => {
-  const {
+  /*const {
     body: { date, mood, content },
     session: { displayName }
   } = req;
@@ -95,5 +93,5 @@ export const postEdit = (req, res) => {
   } catch (error) {
     console.error(error);
     return res.send({ diaryUpload: false });
-  }
+  }*/
 };
