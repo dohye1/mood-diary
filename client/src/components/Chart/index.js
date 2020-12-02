@@ -46,8 +46,8 @@ const state = {
         <div className="chart-container">
              <Pie
           data={state}
-          width={500}
-          height={200}
+          width={250}
+          height={100}
           options={{
             responsive: false,
             maintainAspectRatio: false,
