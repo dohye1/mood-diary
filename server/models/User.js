@@ -10,7 +10,7 @@ const userSchema = new mongoose.Schema({
         type:String,
         required:true
     },
-    nickname:{
+    name:{
         type:String,
         required:true
     },
@@ -18,7 +18,8 @@ const userSchema = new mongoose.Schema({
         type:String
     },
     selfPromise:{
-        type:String
+        type:String,
+        default:''
     },
     diarys:[{
         type:mongoose.Schema.Types.ObjectId

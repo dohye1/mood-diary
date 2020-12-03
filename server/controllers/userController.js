@@ -1,29 +1,27 @@
-
+import User from '../models/User';
 import bcrypt from 'bcryptjs';
-let sql;
 
 export const getMe = async ()=>{
 }
+
+// 새로운 유저를 만듦
+// post method   /api/user
 export const postUser = async (req, res) => {
-  /*const {
-    body: {
-      data: { email, password, nickname }
-    }
-  } = req;
+ const {body:{email, password, name}} = req;
   try {
+    const emailCheck = await User.findOne({email});
+    if(emailCheck !== null){ return res.status(400).json({ register:false, error: true, message:'you can not use this email \n try again'}); }
     const salt = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(password, salt);
-    sql = `insert into user(email, password, nickname) values ("${email}", "${hash}", "${nickname}")`;
-    dbConnection.query(sql, (error, result) => {
-      if (error) {
-        return res.send({ register: 'fail', registerType: 'email' });
-      }
-      return res.send({ register: 'success', registerType: 'register' });
-    });
+    const newUser = await User.create({
+        email, password:hash, name
+    })
+    console.log(newUser);
+    return res.status(201).json({ register:true, error: false, message :''});
   } catch (error) {
     console.log(error);
-    return res.send({ register: 'fail', registerType: 'fail' });
-  }*/
+    return res.status(409).json({ register:false, error: true, message :'register fail, try again'});
+  }
 };
 
 export const patchMe = (req, res) => {

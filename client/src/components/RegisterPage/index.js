@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import {newUser} from '../../actions/userAction';
+
 import "./styles.scss";
 
-const RegisterPage = () =>{
+const RegisterPage = (props) =>{
+    const dispatch = useDispatch();
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -13,6 +16,10 @@ const RegisterPage = () =>{
     const [nameCss, setNameCss] = useState('');
     const [pwCss, setPwCss] = useState('');
     const [confirmPwCss, setConfirmPwCss] = useState('');
+
+    const isRegistered = useSelector((state)=>state.userReducer.register);
+
+    console.log(isRegistered);
 
         const handleClick = (e) => {
         e.preventDefault();
@@ -32,24 +39,20 @@ const RegisterPage = () =>{
             setConfirmPwCss('warning');
             setTimeout(() => setConfirmPwCss(''), 1500);
         }
-        if (
-            (email !== '' &&
-                password !== '' &&
+        //email 타입체크
+        if(!(/^((\w|[\-\.])+)@((\w|[\-\.])+)\.([A-Za-z]+)$/.test(email))){
+            alert('이메일 형식에 맞게 입력해 주세요.');
+            return false;
+        }
+        if (password !== '' &&
                 name !== '' &&
                 confirmPassword !== ''
-            )
         ) {
-            // dispatch(
-            //     register({
-            //         Email,
-            //         Password,
-            //         Name,
-            //         IdNum,
-            //         ConfirmPassword,
-            //         Department,
-            //         Role,
-            //     }),
-            // );
+            dispatch(newUser({
+                    email,
+                    password,
+                    name
+            }))
         }
     };
 
@@ -61,6 +64,12 @@ const RegisterPage = () =>{
             setConfirmPwCss('');
         }
     };
+
+    useEffect(()=>{
+        if(isRegistered){
+            props.history.push('/login');
+        }
+    })
 
     return (
         <div className="register-container">
