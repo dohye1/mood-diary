@@ -10,7 +10,7 @@ LOGIN_FAILURE,
 
 const initState = {
     register : false,
-    login : false
+    isAuth : false
 }
 
 const userReducer = ( state = initState , action) => {
@@ -22,10 +22,10 @@ const userReducer = ( state = initState , action) => {
             state.register = false;
             return { ...state };        
         case LOGIN_SUCCESS :
-            state.login = true;
+            state.isAuth = true;
             return { ...state };
         case LOGIN_FAILURE :
-            state.login = false;
+            state.isAuth = false;
             return { ...state }; 
         case ME_SUCCESS :
             return { ...state };

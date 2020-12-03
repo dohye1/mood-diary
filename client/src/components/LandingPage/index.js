@@ -1,10 +1,17 @@
-import React, {useState, useEffect} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import Chart from '../Chart';
 import CalendarPage from '../CalendarPage';
 import "./styles.scss";
 
-const LandingPage = () =>{
+const LandingPage = (props) =>{
+    const isAuth = useSelector((state)=>state.userReducer.isAuth);
+    useEffect(()=>{
+        if(!isAuth){
+            props.history.push('/login');
+        }
+    })
+
     return (
         <div className="landing-container">
             <h2 className='title'>5월</h2>
