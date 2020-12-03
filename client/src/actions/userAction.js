@@ -1,4 +1,4 @@
-import {ME_REQUEST, EDIT_ME_REQUEST, NEW_ME_REQUEST, AVATAR_REQUEST} from './types';
+import {ME_REQUEST, EDIT_ME_REQUEST, NEW_ME_REQUEST, AVATAR_REQUEST, LOGIN_REQUEST, LOGOUT_REQUEST} from './types';
 
 export const getMe = () => ({
     type: ME_REQUEST
@@ -17,4 +17,13 @@ export const newUser = (userInfo) => ({
 export const editAvatar = (avatarInfo) => ({
     type: AVATAR_REQUEST,
     payload: avatarInfo
+})
+
+export const login = (userInfo) => ({
+    type: LOGIN_REQUEST,
+    payload: userInfo
+})
+
+export const logout = () => ({
+    type: LOGOUT_REQUEST
 })

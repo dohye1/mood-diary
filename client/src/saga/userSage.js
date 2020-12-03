@@ -1,5 +1,5 @@
 import {all, fork, takeEvery, takeLatest, put, call} from 'redux-saga/effects';
-import {ME_REQUEST, EDIT_ME_REQUEST, NEW_ME_REQUEST, AVATAR_REQUEST, NEW_ME_SUCCESS, NEW_ME_FAILURE} from '../actions/types';
+import {ME_REQUEST, EDIT_ME_REQUEST, NEW_ME_REQUEST, AVATAR_REQUEST, NEW_ME_SUCCESS, NEW_ME_FAILURE,LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT_SUCCESS, LOGOUT_FAILURE} from '../actions/types';
 import axios from 'axios';
 
 function* postNewMe({payload}){
