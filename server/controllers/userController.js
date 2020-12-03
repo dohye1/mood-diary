@@ -1,6 +1,9 @@
 import User from '../models/User';
 import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
 
+dotenv.config();
 
 // 새로운 유저를 만듦
 // post method   /api/user
@@ -22,7 +25,38 @@ export const postUser = async (req, res) => {
   }
 };
 
-export const patchMe = (req, res) => {
+
+export const postLogin = async (req, res) => {
+  const { body : {email, password}} = req;
+  try {
+    // 해당 이메일의 사용자가 있는지 확인
+    const nowUser = await User.findOne({email});
+    if(nowUser === null) { return res.status(400).json({ login:false, error: true, message :'해당 이메일의 사용자가 없습니다. \n회원가입을 먼저 해주세요.'});} 
+    
+    const hash = nowUser.password;
+
+    bcrypt.compare(password, hash, (err, loginResult) => {
+      if (err) {
+         throw Error;
+      }
+      if(loginResult){
+          // 로그인성공했으면 jwt으로 토큰만들기
+          const token = jwt.sign(nowUser._id.toString(), process.env.SECRET_KEY);
+          nowUser.token = token;
+          nowUser.save();
+          return res.cookie("x_auth", nowUser.token).status(200).json({ login: true, error: false, message :''});
+      }else{
+        return res.status(400).json({ login:false, error: true, message :'비밀번호가 틀렸습니다. \n다시 시도해주세요.'});
+      }
+    })
+  } catch (error) {
+    console.log(error);
+    return res.status(409).json({ login:false, error: true, message :'login fail. try again'});
+  };
+}
+
+
+export const patchUser = (req, res) => {
   /*const {
     body: { Nickname, Promise },
     session: { displayName }
@@ -42,7 +76,7 @@ export const patchMe = (req, res) => {
   }*/
 };
 
-export const getMe = async ()=>{
+export const getUser = async ()=>{
 }
 
 export const postAvatar = (req, res) => {
@@ -75,46 +109,6 @@ export const postAvatar = (req, res) => {
     });
   } catch (error) {
     console.log(error);
-  }*/
-};
-
-export const postLogin = async (req, res) => {
-  console.log(req)
-  let user = { email: '', nickname: '', avatar: '', promise: '' };
-  /*try {
-    sql = `select * from user where email="${email}"`;
-    dbConnection.query(sql, (error, result) => {
-      if (error) {
-        return res.send({ login: 'fail', user, loginType: 'email' });
-      }
-      if (result.length == 0) {
-        return res.send({ login: 'fail', user, loginType: 'email' });
-      } else {
-        const hash = result[0].password;
-        bcrypt.compare(password, hash, (err, login) => {
-          if (err) {
-            return res.send({ login: 'fail', user, loginType: 'password' });
-          }
-          if (login) {
-            req.session.displayName = email;
-            req.session.save(() => {
-              user = {
-                email: result[0].email,
-                nickname: result[0].nickname,
-                avatar: result[0].avatar,
-                promise: result[0].promise
-              };
-              return res.send({ login: 'success', user, loginType: 'login' });
-            });
-          } else {
-            return res.send({ login: 'fail', user, loginType: 'password' });
-          }
-        });
-      }
-    });
-  } catch (error) {
-    console.log(error);
-    return res.send({ login: 'fail' });
   }*/
 };
 

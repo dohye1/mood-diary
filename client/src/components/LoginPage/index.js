@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-
+import { login } from '../../actions/userAction';
 import './styles.scss';
 
-const LoginPage = () => {
+const LoginPage = (props) => {
+    const dispatch = useDispatch();
+    const loginResult = useSelector((state)=>state.userReducer.login);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [emailCss, setEmailCss] = useState('');
@@ -20,16 +22,21 @@ const LoginPage = () => {
             setPwCss('warning');
             setTimeout(() => setPwCss(''), 1500);
         }
-        if (email !== '' && password !== '') {
-            //dispatch(login(Email, Password));
+        //email 타입체크
+        if(!(/^((\w|[\-\.])+)@((\w|[\-\.])+)\.([A-Za-z]+)$/.test(email))){
+            alert('이메일 형식에 맞게 입력해 주세요.');
+            return false;
+        }
+        if (password !== '') {
+            dispatch(login({email, password}));
         }
     };
 
     useEffect(() => {
-        // if (loginResult === false) {
-        //     alert('login에 실패했습니다.');
-        // }
-    }, []);
+        if (loginResult) {
+            props.history.push('/');
+        }
+    });
 
     return (
         <div className="login-container">

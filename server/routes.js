@@ -7,9 +7,6 @@ const ROOT = "/"
 const API_USER = '/api/user'; 
 const LOGIN = '/login'; 
 const LOGOUT = '/logout';
-// get 메서드 사용시 token의 주인 정보를 return 함
-// patch메서드 사용시 user info 변경
-const ME = '/me';
 const AVATAR = '/avatar';
 
 //DIARY
@@ -21,7 +18,6 @@ const routes = {
   apiUser : API_USER,
   login: LOGIN,
   logout: LOGOUT,
-  me:ME,
   avatar: AVATAR,
   apiDiary: API_DIARY,
   count : COUNT
