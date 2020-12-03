@@ -15,3 +15,9 @@ export const upload = multer({
     bucket: 'mood-upload'
   })
 });
+
+export const auth = (req, res, next) => {
+  console.log(req);
+  //  /api/user/me 구성시 작성예정
+  // next();
+}

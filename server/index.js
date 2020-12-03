@@ -7,7 +7,6 @@ import session from 'express-session';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import routes from './routes';
-import authRouter from './routers/authRouter';
 import userRouter from './routers/userRouter';
 import diaryRouter from './routers/diaryRouter';
 import './db';
@@ -25,7 +24,6 @@ app.use(cookieParser());
 
 app.use(routes.apiDiary, diaryRouter);
 app.use(routes.apiUser, userRouter);
-app.use(routes.apiAuth, authRouter);
 
 // app.get('/', (req, res) => {
 //   res.sendFile(path.join(__dirname, '../client/build/index.html'));
