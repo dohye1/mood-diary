@@ -10,7 +10,8 @@ LOGIN_FAILURE,
 
 const initState = {
     register : false,
-    isAuth : false
+    isAuth : localStorage.getItem('user_token'),
+    user : {}
 }
 
 const userReducer = ( state = initState , action) => {
@@ -22,19 +23,19 @@ const userReducer = ( state = initState , action) => {
             state.register = false;
             return { ...state };        
         case LOGIN_SUCCESS :
-            state.isAuth = true;
+            state.user = action.data.user;
+            state.isAuth = action.data.user.token;
             return { ...state };
         case LOGIN_FAILURE :
-            state.isAuth = false;
-            return { ...state }; 
+            return { ...state };
         case ME_SUCCESS :
+            state.user = action.data.user;
             return { ...state };
         case ME_FAILURE :
             return { ...state };
         case EDIT_ME_SUCCESS :
         case EDIT_ME_FAILURE :
             return { ...state };
-       
         default:
             return {...state};
     }

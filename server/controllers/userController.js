@@ -11,17 +11,17 @@ export const postUser = async (req, res) => {
  const {body:{email, password, name}} = req;
   try {
     const emailCheck = await User.findOne({email});
-    if(emailCheck !== null){ return res.status(400).json({ register:false, error: true, message:'you can not use this email \n try again'}); }
+    if(emailCheck !== null){ return res.status(400).json({ message:'you can not use this email \n try again'}); }
     const salt = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(password, salt);
     const newUser = await User.create({
         email, password:hash, name
     })
     console.log(newUser);
-    return res.status(201).json({ register:true, error: false, message :''});
+    return res.status(201).json({ message :''});
   } catch (error) {
     console.log(error);
-    return res.status(409).json({ register:false, error: true, message :'register fail, try again'});
+    return res.status(409).json({message :'register fail, try again'});
   }
 };
 
@@ -31,7 +31,7 @@ export const postLogin = async (req, res) => {
   try {
     // 해당 이메일의 사용자가 있는지 확인
     const nowUser = await User.findOne({email});
-    if(nowUser === null) { return res.status(400).json({ login:false, error: true, message :'해당 이메일의 사용자가 없습니다. \n회원가입을 먼저 해주세요.'});} 
+    if(nowUser === null) { return res.status(400).json({ message :'해당 이메일의 사용자가 없습니다. \n회원가입을 먼저 해주세요.'});} 
     
     const hash = nowUser.password;
 
@@ -44,14 +44,14 @@ export const postLogin = async (req, res) => {
           const token = jwt.sign(nowUser._id.toString(), process.env.SECRET_KEY);
           nowUser.token = token;
           nowUser.save();
-          return res.cookie("x_auth", nowUser.token).status(200).json({ login: true, error: false, message :''});
+          return res.cookie("x_auth", token).status(200).json({ message :'', userInfo : nowUser});
       }else{
-        return res.status(400).json({ login:false, error: true, message :'비밀번호가 틀렸습니다. \n다시 시도해주세요.'});
+        return res.status(400).json({ message :'비밀번호가 틀렸습니다. \n다시 시도해주세요.', nowUser:{}});
       }
     })
   } catch (error) {
     console.log(error);
-    return res.status(409).json({ login:false, error: true, message :'login fail. try again'});
+    return res.status(409).json({ message :'login fail. try again'});
   };
 }
 
@@ -76,7 +76,16 @@ export const patchUser = (req, res) => {
   }*/
 };
 
-export const getUser = async ()=>{
+export const getUser = (req, res)=>{
+  const { user } = req;
+  try { 
+    console.log(user);
+    return res.status(200).json({message:'', user})
+  }catch(error){
+    console.log(error);
+    return res.status(404).json({message:'사용자 정보를 얻는데에 실패했습니다', user: {}})
+
+  }
 }
 
 export const postAvatar = (req, res) => {

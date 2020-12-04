@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Calendar } from 'antd';
 import {getDiary} from '../../actions/diaryAction';
+import {getMe} from '../../actions/userAction';
 import Chart from '../Chart';
 import Modal from '../Modal';
 
@@ -14,8 +15,8 @@ const LandingPage = (props) =>{
     const [pickDate, setPickDate] = useState(`${new Date(Date.now()).getFullYear()}-${
       new Date(Date.now()).getMonth() + 1
     }`); 
-
     const isAuth = useSelector((state)=>state.userReducer.isAuth);
+    const user = useSelector((state)=>state.userReducer.user);
     const diaries = useSelector(state=>state.diaryReducer.diaries);
     
    
@@ -65,12 +66,16 @@ const LandingPage = (props) =>{
     useEffect(()=>{
         if(isAuth){
             dispatch(getDiary());
-            console.log('여기실행됨')
-        }    
+            console.log(user);
+            if(Object.keys(user).length === 0){
+                console.log('여기되나..?')
+                dispatch(getMe())
+            }
+        }
     },[])
 
     useEffect(()=>{
-        if(!isAuth){
+        if(isAuth === null){
             props.history.push('/login');
         }
     });

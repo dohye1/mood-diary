@@ -5,6 +5,7 @@ import "./styles.scss";
 
 const Nav = () => {
     const isAuth = useSelector((state)=>state.userReducer.isAuth);
+    const user = useSelector((state)=>state.userReducer.user);
     const [isTop, setIsTop] = useState(true); // 화면에 보여지는 데이터가 아니라 css관련 설정 state
 
     const scrollBG = () =>{
@@ -24,9 +25,9 @@ const Nav = () => {
             <Link to="/">MOOD</Link>
         </div>
         {
-            isAuth ? (
+            isAuth? (
                 <ul className="side user-info">
-                    <li><Link to="/my">김땡떙 님</Link></li>
+                    <li><Link to="/my">{user && user.name} 님</Link></li>
                     <li>LOGOUT</li>
                 </ul>
         ):(<div className="side"></div>)

@@ -6,11 +6,12 @@ import './styles.scss';
 
 const LoginPage = (props) => {
     const dispatch = useDispatch();
-    const loginResult = useSelector((state)=>state.userReducer.isAuth);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [emailCss, setEmailCss] = useState('');
     const [pwCss, setPwCss] = useState('');
+
+    const isAuth = useSelector((state)=>state.userReducer.isAuth);
 
     const handleClick = (e) => {
         e.preventDefault();
@@ -33,7 +34,7 @@ const LoginPage = (props) => {
     };
 
     useEffect(() => {
-        if (loginResult) {
+        if (isAuth) {
             props.history.push('/');
         }
     });

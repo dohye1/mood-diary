@@ -2,15 +2,14 @@
 
 const ROOT = "/"
 
-//USER user와 관련된 정보를 얻는 api
-// post 방식으로 보내면 사용자 추가
+//USER
 const API_USER = '/api/user'; 
 const LOGIN = '/login'; 
 const LOGOUT = '/logout';
 const AVATAR = '/avatar';
 
 //DIARY
-const API_DIARY = '/api/diary'; //get, post, patch
+const API_DIARY = '/api/diary';
 const COUNT = "/count";
 
 const routes = {

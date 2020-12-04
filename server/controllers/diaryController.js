@@ -56,10 +56,10 @@ export const postDiary = async (req, res) => {
   try {
     const newDiary = await Diary.create({ email, mood, content, post_day, post_month, post_year });
     await User.findByIdAndUpdate({_id}, {diaries : [...diaries, newDiary._id]});
-    return res.status(201).json({ createDiary :true, error: false, message : '', diary : newDiary})
+    return res.status(201).json({  message : '', diary : newDiary})
   } catch (error) {
     console.error(error);
-    return res.status(201).json({ createDiary :false, error: true, message : '다이어리 작성에 실패했습니다\n다시 시도해주세요', diary : {} });
+    return res.status(201).json({ message : '다이어리 작성에 실패했습니다\n다시 시도해주세요', diary : {} });
   }
 };
 
