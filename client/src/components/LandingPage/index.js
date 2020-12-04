@@ -35,6 +35,7 @@ const LandingPage = (props) =>{
         console.log(value.format('YYYY-MM-DD'));
     }
 
+
     let dateItem;
     const dateCellRender = (value) =>{
         if(value.format('DD')==="01"){
@@ -61,28 +62,22 @@ const LandingPage = (props) =>{
         }
     }
 
-    // 초기에 한번만 실행됨
     useEffect(()=>{
-        if(isAuth){
+        console.log('초기에 실행됨')
+        if(isAuth === null){
+            props.history.push('/login');
+        }else{
             dispatch(getDiary());
-            console.log(user);
             if(Object.keys(user).length === 0){
-                console.log('여기되나..?')
                 dispatch(getMe())
             }
         }
-    },[])
-
-    useEffect(()=>{
-        if(isAuth === null){
-            props.history.push('/login');
-        }
-    });
+    },[]);
 
     return (
         <div className="landing-container">
             <h2 className='title'>{title}</h2>
-            <h3 className="self-promise">나의다짐!!!</h3>
+            <h3 className="self-promise">{user.selfPromise}</h3>
             <Chart />
             <Calendar 
                 onSelect={onSelect}

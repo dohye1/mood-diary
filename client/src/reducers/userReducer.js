@@ -34,6 +34,11 @@ const userReducer = ( state = initState , action) => {
         case ME_FAILURE :
             return { ...state };
         case EDIT_ME_SUCCESS :
+            console.log(action.data);
+            console.log('여기가 마지막에 실행되야함')
+            state.user = action.data.user;
+            console.log(state.user);
+            return { ...state };
         case EDIT_ME_FAILURE :
             return { ...state };
         default:

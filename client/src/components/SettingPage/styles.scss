@@ -1,0 +1,52 @@
+@import "../utils/variables";
+
+.setting-container{
+    width:60vw;
+    margin-top:13vh;
+    font-family: $logo;
+    display: flex;
+    justify-content: space-between;
+    .box{
+        width:40%;
+        min-height:19vh;
+        border-radius: 3px;
+        background-color: #78787839;
+        box-shadow: 2px 2px 7px 2px rgba(0,0,0,0.3);
+        margin:2em;
+        padding:2em 2em;
+        box-sizing: border-box;
+        hr{
+            width:80%;
+            height:1px;
+            border:none;
+            background-color: rgb(99, 99, 99);
+        }
+        .title{
+            font-size:1.2rem;
+            margin-bottom: 0.2em;
+            margin-top:1em;
+            color:#676161;
+        }
+        input{
+            width:80%;
+            border:none;
+            background:none;
+            border-bottom: 2px solid #f2f2f2;
+            outline:none;
+            padding:4px 8px;
+        }
+        button{
+            width:5em;
+            height:3em;
+            border:none;
+            border-radius: 3px;
+            margin-top:2em;
+        }
+    }
+    .profile-box{
+        display: flex;
+        flex-direction: column;
+
+    }
+
+}

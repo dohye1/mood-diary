@@ -11,6 +11,6 @@ userRouter.post(routes.login, postLogin);
 userRouter.get(routes.logout, getLogout);
 userRouter.post(routes.root, postUser);
 userRouter.get(routes.root, auth, getUser);
-userRouter.patch(routes.root, patchUser);
+userRouter.patch(routes.root, auth, patchUser);
 
 export default userRouter;

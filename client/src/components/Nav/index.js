@@ -27,7 +27,7 @@ const Nav = () => {
         {
             isAuth? (
                 <ul className="side user-info">
-                    <li><Link to="/my">{user && user.name} 님</Link></li>
+                    <li><Link to="/settings">{user && user.name} 님</Link></li>
                     <li>LOGOUT</li>
                 </ul>
         ):(<div className="side"></div>)

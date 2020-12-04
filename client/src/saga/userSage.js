@@ -5,7 +5,8 @@ import {
     ME_SUCCESS, 
     ME_FAILURE, 
     EDIT_ME_REQUEST, 
-    AVATAR_REQUEST, 
+    EDIT_ME_SUCCESS,
+    EDIT_ME_FAILURE, 
     NEW_ME_REQUEST, 
     NEW_ME_SUCCESS, 
     NEW_ME_FAILURE,
@@ -62,10 +63,27 @@ function* getMe(){
     }
 }
 
+function* postEditMe({payload}){
+    const result = yield axios.patch("/api/user", payload, {validateStatus : function (status){return status < 500}});
+    try{
+        const { status, data } = result;
+        if(status === 200){
+            console.log(data);
+            yield put({type:EDIT_ME_SUCCESS, data});
+        }else{
+            throw new Error();
+        }
+    }catch(error){
+        yield alert(result.data.message);
+        yield put({type:EDIT_ME_FAILURE});
+    }
+}
+
 function* watchUser(){
     yield takeEvery(NEW_ME_REQUEST, postNewMe);
     yield takeEvery(LOGIN_REQUEST, postLogin);
     yield takeEvery(ME_REQUEST, getMe);
+    yield takeEvery(EDIT_ME_REQUEST, postEditMe);
 }
 
 export default function* userSaga () {

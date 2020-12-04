@@ -56,24 +56,19 @@ export const postLogin = async (req, res) => {
 }
 
 
-export const patchUser = (req, res) => {
-  /*const {
-    body: { Nickname, Promise },
-    session: { displayName }
+export const patchUser = async(req, res) => {
+  const {
+    body: { name, selfPromise },
+    user : { _doc, _id}
   } = req;
-  console.log(Nickname, Promise, displayName);
   try {
-    sql = `update user set nickname="${Nickname}", promise="${Promise}" where email="${displayName}"`;
-    dbConnection.query(sql, (error, result) => {
-      if (error) {
-        console.log(error);
-        return res.send({ editProfile: 'fail' });
-      }
-      return res.send({ editProfile: 'success' });
-    });
-  } catch (error) {
+    await User.findByIdAndUpdate({_id}, {name, selfPromise});
+    return res.status(200).json({message:'', user:{..._doc, name, selfPromise}});  
+} catch (error) {
     console.log(error);
-  }*/
+    return res.status(400).json({message:'update fail, try again', user:{}});  
+
+  }
 };
 
 export const getUser = (req, res)=>{
