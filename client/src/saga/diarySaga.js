@@ -18,11 +18,25 @@ import {
     COUNT_FAILURE
 } from '../actions/types';
 
+function* getDiary({payload}){
+    const result = yield axios.get("/api/diary", {validateStatus : function (status){return status < 500}});
+    try{
+        const { status, data } = result;
+        if(status === 200){
+            yield put({type:DIARY_SUCCESS, data});
+        }else{
+            throw new Error();
+        }
+    }catch(error){
+        yield alert(result.data.message)
+        yield put({type:DIARY_FAILURE});
+    }
+}
+
 function* postNewDiary({payload}){
     const result = yield axios.post("/api/diary", payload, {validateStatus : function (status){return status < 500}});
     try{
         const { status, data } = result;
-        console.log(result);
         if(status === 201){
             yield put({type:NEW_DIARY_SUCCESS, data});
         }else{
@@ -35,6 +49,7 @@ function* postNewDiary({payload}){
 }
 
 function* watchDiary(){
+    yield takeEvery(DIARY_REQUEST, getDiary);
     yield takeEvery(NEW_DIARY_REQUEST, postNewDiary);
 }
 

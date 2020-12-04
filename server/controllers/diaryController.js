@@ -2,11 +2,42 @@ import Diary from '../models/Diary';
 import User from '../models/User';
 
 export const getDiary = async(req, res)=>{
-
+  const {
+    user : {email}
+  } = req;
+  try{
+    const allDiaries = await Diary.findOne({email});
+    return res.status(200).json({diaries : allDiaries, message:''})
+  }catch(error){
+    console.log(error);
+    return res.status(404).json({diaries : [], message:'데이터를 찾을수 없습니다.\n다시 시도해주세요.'});
+  } 
 }
 
 export const patchDiary = async(req, res)=>{
-
+  /*const {
+    body: { date, mood, content },
+    session: { displayName }
+  } = req;
+  console.log(date, mood, content, displayName);
+  const splitedDate = date.split('-');
+  const year = splitedDate[0];
+  const month = parseInt(splitedDate[1]);
+  const day = parseInt(splitedDate[2]);
+  try {
+    const sql = `update diary set mood="${mood}", content="${content}" where post_year=${year} and post_month=${month} and post_day=${day} and email="${displayName}"`;
+    dbConnection.query(sql, (error, result) => {
+      if (error) {
+        console.error(error);
+        return res.send({ diaryUpload: false });
+      }
+      console.log(result);
+      return res.send({ diaryUpload: true });
+    });
+  } catch (error) {
+    console.error(error);
+    return res.send({ diaryUpload: false });
+  }*/
 }
 
 export const deleteDiary = async(req, res)=>{
@@ -63,32 +94,5 @@ export const getCount = async (req, res) => {
     }
   } catch (error) {
     console.error(error);
-  }*/
-};
-
-
-export const postEdit = (req, res) => {
-  /*const {
-    body: { date, mood, content },
-    session: { displayName }
-  } = req;
-  console.log(date, mood, content, displayName);
-  const splitedDate = date.split('-');
-  const year = splitedDate[0];
-  const month = parseInt(splitedDate[1]);
-  const day = parseInt(splitedDate[2]);
-  try {
-    const sql = `update diary set mood="${mood}", content="${content}" where post_year=${year} and post_month=${month} and post_day=${day} and email="${displayName}"`;
-    dbConnection.query(sql, (error, result) => {
-      if (error) {
-        console.error(error);
-        return res.send({ diaryUpload: false });
-      }
-      console.log(result);
-      return res.send({ diaryUpload: true });
-    });
-  } catch (error) {
-    console.error(error);
-    return res.send({ diaryUpload: false });
   }*/
 };

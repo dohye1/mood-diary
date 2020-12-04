@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Calendar } from 'antd';
+import {getDiary} from '../../actions/diaryAction';
 import Chart from '../Chart';
 import Modal from '../Modal';
 
 import "./styles.scss";
 
 const LandingPage = (props) =>{
+    const dispatch = useDispatch();
     const [title, setTitle] = useState(new Date(Date.now()).getMonth() + 1)
     const [openModal, setOpenModal] = useState(false);
     const [pickDate, setPickDate] = useState(`${new Date(Date.now()).getFullYear()}-${
@@ -59,11 +61,18 @@ const LandingPage = (props) =>{
         }
     }
 
+    // 초기에 한번만 실행됨
+    useEffect(()=>{
+        if(isAuth){
+            dispatch(getDiary());
+            console.log('여기실행됨')
+        }    
+    },[])
+
     useEffect(()=>{
         if(!isAuth){
             props.history.push('/login');
         }
-        console.log(diaries)
     });
 
     return (
