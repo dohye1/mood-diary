@@ -44,9 +44,9 @@ export const postLogin = async (req, res) => {
           const token = jwt.sign(nowUser._id.toString(), process.env.SECRET_KEY);
           nowUser.token = token;
           nowUser.save();
-          return res.cookie("x_auth", token).status(200).json({ message :'', userInfo : nowUser});
+          return res.cookie("x_auth", token).status(200).json({ message :'', user : nowUser});
       }else{
-        return res.status(400).json({ message :'비밀번호가 틀렸습니다. \n다시 시도해주세요.', nowUser:{}});
+        return res.status(400).json({ message :'비밀번호가 틀렸습니다. \n다시 시도해주세요.', user:{}});
       }
     })
   } catch (error) {

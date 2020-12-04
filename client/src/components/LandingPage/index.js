@@ -53,7 +53,6 @@ const LandingPage = (props) =>{
                 {dateItem && dateItem.content}
             </>
         )
-
     }
 
     const monthCellRender = (value) =>{

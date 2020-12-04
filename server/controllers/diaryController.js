@@ -6,7 +6,7 @@ export const getDiary = async(req, res)=>{
     user : {email}
   } = req;
   try{
-    const allDiaries = await Diary.findOne({email});
+    const allDiaries = await Diary.find({email});
     return res.status(200).json({diaries : allDiaries, message:''})
   }catch(error){
     console.log(error);

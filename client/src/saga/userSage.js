@@ -21,6 +21,7 @@ function* postLogin({payload}){
         const { status, data } = result;
         if(status === 200){
             yield put({type:LOGIN_SUCCESS, data});
+            console.log( data +"여기 있음!!!")
             localStorage.setItem('user_token', data.user.token);
         }else{
             throw new Error();

@@ -18,12 +18,12 @@ const initState = {
 const userReducer = ( state = initState , action) => {
     switch(action.type){
         case NEW_DIARY_SUCCESS :
-            state.diaries = [...state.diaries, action.data.diary];
+            state.diaries.push(action.data.diary)
             return { ...state };
         case NEW_DIARY_FAILURE :
             return { ...state };     
         case DIARY_SUCCESS :
-            state.diaries = [...state.diaries, action.data.diaries];
+            state.diaries = action.data.diaries;
             return { ...state };
         case DIARY_FAILURE :
             return { ...state };      
