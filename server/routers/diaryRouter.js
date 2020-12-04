@@ -1,4 +1,5 @@
 import express from 'express';
+import {auth} from '../middleware';
 import routes from '../routes';
 import {
   getDiary,
@@ -10,10 +11,10 @@ import {
 
 const diaryRouter = express.Router();
 
-diaryRouter.get(routes.root, getDiary);
-diaryRouter.post(routes.root, postDiary);
-diaryRouter.patch(routes.root, patchDiary);
+diaryRouter.get(routes.root, auth, getDiary);
+diaryRouter.post(routes.root, auth, postDiary);
+diaryRouter.patch(routes.root, auth, patchDiary);
 diaryRouter.delete(routes.root, deleteDiary);
-diaryRouter.delete(routes.count, getCount);
+diaryRouter.delete(routes.count, auth, getCount);
 
 export default diaryRouter;

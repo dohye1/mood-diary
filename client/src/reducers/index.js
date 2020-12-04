@@ -1,8 +1,9 @@
 import { combineReducers } from 'redux';
 import userReducer from './userReducer';
+import diaryReducer from './diaryReducer';
 
 const rootReducer = combineReducers({
-    userReducer
+    userReducer, diaryReducer
 });
 
 export default rootReducer;

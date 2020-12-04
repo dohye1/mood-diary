@@ -21,8 +21,9 @@ const userSchema = new mongoose.Schema({
         type:String,
         default:''
     },
-    diarys:[{
-        type:mongoose.Schema.Types.ObjectId
+    diaries:[{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'Diary'
     }],
     token:String
 })

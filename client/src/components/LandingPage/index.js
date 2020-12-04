@@ -2,22 +2,27 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Calendar } from 'antd';
 import Chart from '../Chart';
+import Modal from '../Modal';
+
 import "./styles.scss";
 
 const LandingPage = (props) =>{
     const [title, setTitle] = useState(new Date(Date.now()).getMonth() + 1)
-    
-    const isAuth = useSelector((state)=>state.userReducer.isAuth);
-
+    const [openModal, setOpenModal] = useState(false);
     const [pickDate, setPickDate] = useState(`${new Date(Date.now()).getFullYear()}-${
       new Date(Date.now()).getMonth() + 1
-    }`);
+    }`); 
+
+    const isAuth = useSelector((state)=>state.userReducer.isAuth);
+    const diaries = useSelector(state=>state.diaryReducer.diaries);
+    
    
     // 구체적인 날짜가 선택되었을때 작동
     // 일기를 작성할때 사용
-    const onSelect = async(value, mode) =>{
+    const onSelect = async(value) =>{
         setPickDate(value.format('YYYY-MM-DD'));    
-        console.log(mode);
+        await setOpenModal(true);
+        setOpenModal(false);
     }
 
     // 년과 월이 서로 변경될때 작동
@@ -27,11 +32,25 @@ const LandingPage = (props) =>{
         console.log(value.format('YYYY-MM-DD'));
     }
 
+    let dateItem;
     const dateCellRender = (value) =>{
         if(value.format('DD')==="01"){
             const month = Number(value.format('MM'))-1;            
             setTitle(month === 0? 12 : month);
         }
+        let date = value.format("YYYY-MM-DD").split("-");
+        let day = parseInt(date[2]);
+        let month = parseInt(date[1]);
+        let year = parseInt(date[0]);
+        if(diaries.length > 0){
+            dateItem = diaries.find(diary=>diary.post_year === year && diary.post_month===month && diary.post_day === day);
+        }
+        return (
+            <>
+                {dateItem && dateItem.content}
+            </>
+        )
+
     }
 
     const monthCellRender = (value) =>{
@@ -44,7 +63,8 @@ const LandingPage = (props) =>{
         if(!isAuth){
             props.history.push('/login');
         }
-    })
+        console.log(diaries)
+    });
 
     return (
         <div className="landing-container">
@@ -56,7 +76,8 @@ const LandingPage = (props) =>{
                 onPanelChange={onPanelChange}
                 dateCellRender={dateCellRender}
                 monthCellRender={monthCellRender}
-        />
+            />
+            <Modal date={pickDate} openModal={openModal}/>
         </div>
 
 

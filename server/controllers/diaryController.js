@@ -1,3 +1,5 @@
+import Diary from '../models/Diary';
+import User from '../models/User';
 
 export const getDiary = async(req, res)=>{
 
@@ -12,27 +14,22 @@ export const deleteDiary = async(req, res)=>{
 }
 
 export const postDiary = async (req, res) => {
-  /*const {
+  const {
     body: { date, mood, content },
-    session: { displayName }
+    user : { _id , email, diaries}
   } = req;
   const splitedDate = date.split('-');
-  const year = splitedDate[0];
-  const month = splitedDate[1];
-  const day = splitedDate[2];
+  const post_year = splitedDate[0];
+  const post_month = splitedDate[1];
+  const post_day = splitedDate[2];
   try {
-    const sql = `insert into diary(email, post_year, post_month, post_day, mood, content) values ("${displayName}", "${year}", "${month}", "${day}", "${mood}", "${content}")`;
-    dbConnection.query(sql, (error, result) => {
-      if (error) {
-        console.error(error);
-        return res.send({ diaryUpload: false });
-      }
-      return res.send({ diaryUpload: true });
-    });
+    const newDiary = await Diary.create({ email, mood, content, post_day, post_month, post_year });
+    await User.findByIdAndUpdate({_id}, {diaries : [...diaries, newDiary._id]});
+    return res.status(201).json({ createDiary :true, error: false, message : '', diary : newDiary})
   } catch (error) {
     console.error(error);
-    return res.send({ diaryUpload: false });
-  }*/
+    return res.status(201).json({ createDiary :false, error: true, message : '다이어리 작성에 실패했습니다\n다시 시도해주세요', diary : {} });
+  }
 };
 
 export const getCount = async (req, res) => {
