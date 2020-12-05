@@ -1,50 +1,44 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Modal } from 'antd';
-import {newDiary} from '../../actions/diaryAction';
+import { newDiary, editDiary } from '../../actions/diaryAction';
 
 import './styles.scss';
 
-const ModalPage = ({ date, diaryInfo, openModal }) => {
+const ModalPage = ({ date, openModal }) => {
   const dispatch = useDispatch();
   const [visible, setVisible] = useState(openModal);
   const [mood, setMood] = useState('');
   const [content, setContent] = useState('');
-  const [editDiary, setEditDiary] = useState(false); // true면 글을 수정하는것, false면 글을 처음쓰는것
+  const [isEditDiary, setIsEditDiary] = useState(false); // true면 글을 수정하는것, false면 글을 처음쓰는것
+  const [diaryId, setDiaryId] = useState('');
+  const diaries = useSelector(state=>state.diaryReducer.diaries);
 
-  /*const sendDiaryInfo = useCallback((diaryInfo) => {
-    dispatch({ type: POST_DIARY, diaryInfo });
-  });
-
-  const editDiary = useCallback((diaryInfo) => {
-    dispatch({ type: EDIT_DIARY, diaryInfo });
-  });*/
-
-  /*const showData = () => {
-    // 기존에 데이터가 적혀있다면 그 데이터들을 보여줌
+  const findDiaryData = () =>{
+    console.log(diaries);
+    console.log('이거좀실행되라ㅡㅡ')
     const splitedDate = date.split('-');
-    const dayInfo =
-      diaryInfo &&
-      diaryInfo.filter((item) => {
-        if (
-          `${item.POST_YEAR}-${item.POST_MONTH}-${item.POST_DAY}` ===
-          `${splitedDate[0]}-${parseInt(splitedDate[1])}-${parseInt(
-            splitedDate[2]
-          )}`
-        ) {
+    
+    let dayInfo = [];
+    dayInfo = diaries &&
+      diaries.filter((item) => {
+        if (item.post_year === Number(splitedDate[0]) && item.post_month === Number(splitedDate[1]) && item.post_day === Number(splitedDate[2])) {
           return true;
         }
       });
-    if (dayInfo !== 'undifined') {
-      if (dayInfo.length > 0) {
-        setIsUpload(false); // 에딧한다고 알려줌
-        setMood(parseInt(dayInfo[0].MOOD));
-        setContent(dayInfo[0].CONTENT);
+    if(dayInfo !== null){
+      if(dayInfo.length > 0){
+        setIsEditDiary(true);
+        setMood(dayInfo[0].mood);
+        setContent(dayInfo[0].content);
+        setDiaryId(dayInfo[0]._id);
+      }else{
+        setIsEditDiary(false);
+        setMood("");
+        setContent("");
       }
-    } else {
-      setIsUpload(true); // 처음 글쓴다고 알려줌
     }
-  };*/
+  }
 
   const handleOk = (e) => {
     e.preventDefault();
@@ -60,12 +54,13 @@ const ModalPage = ({ date, diaryInfo, openModal }) => {
     setMood('');
     setContent('');
 
-    if (editDiary) {
-      /*sendDiaryInfo({
-        date,
-        mood,
-        content
-      });*/
+    if (isEditDiary) {
+        dispatch(editDiary({
+          diaryId,
+          mood,
+          content
+        })
+      )
     } else {
         dispatch(newDiary({
             date,
@@ -83,11 +78,10 @@ const ModalPage = ({ date, diaryInfo, openModal }) => {
   };
 
   useEffect(() => {
-    /*if (date.length > 7) {
-      showData();
-    }*/
+    console.log(date);
     if (openModal) {
       setVisible(true);
+      findDiaryData();
     }
   },[openModal]);
 
@@ -105,40 +99,40 @@ const ModalPage = ({ date, diaryInfo, openModal }) => {
           <ul className='mood'>
             <li
               value='1'
-              onClick={(e) => setMood(e.target.value)}
-              className={mood === 1 ? 'listClicked' : ''}
+              onClick={(e) => setMood(`${e.target.value}`)}
+              className={mood === "1" ? 'listClicked' : ''}
               title="sooooooooo happy"
             >
               😁
             </li>
             <li
               value='2'
-              onClick={(e) => setMood(e.target.value)}
-              className={mood === 2 ? 'listClicked' : ''}
+              onClick={(e) => setMood(`${e.target.value}`)}
+              className={mood === "2" ? 'listClicked' : ''}
               title="happy"
             >
               🌝
             </li>
             <li
               value='3'
-              onClick={(e) => setMood(e.target.value)}
-              className={mood === 3 ? 'listClicked' : ''}
+              onClick={(e) => setMood(`${e.target.value}`)}
+              className={mood === "3" ? 'listClicked' : ''}
               title="normal"
             >
               😐
             </li>
             <li
               value='4'
-              onClick={(e) => setMood(e.target.value)}
-              className={mood === 4 ? 'listClicked' : ''}
+              onClick={(e) => setMood(`${e.target.value}`)}
+              className={mood === "4" ? 'listClicked' : ''}
               title="sad"
             >
               😭
             </li>
             <li
               value='5'
-              onClick={(e) => setMood(e.target.value)}
-              className={mood === 5 ? 'listClicked' : ''}
+              onClick={(e) => setMood(`${e.target.value}`)}
+              className={mood === "5" ? 'listClicked' : ''}
               title="upset"
             >
               😡

@@ -6,9 +6,7 @@ import {
     NEW_DIARY_SUCCESS,
     NEW_DIARY_FAILURE,
     DELETE_DIARY_SUCCESS,
-    DELETE_DIARY_FAILURE,
-    COUNT_SUCCESS,
-    COUNT_FAILURE
+    DELETE_DIARY_FAILURE
 } from '../actions/types';
 
 const initState = {
@@ -27,6 +25,12 @@ const userReducer = ( state = initState , action) => {
             return { ...state };
         case DIARY_FAILURE :
             return { ...state };      
+        case EDIT_DIARY_SUCCESS :
+            const id = state.diaries.findIndex((diary, index) => {if(diary._id === action.data.diary._id){return true}});
+            state.diaries[id] = action.data.diary;
+            return { ...state };
+        case EDIT_DIARY_FAILURE :
+            return { ...state };    
         default:
             return {...state};
     }

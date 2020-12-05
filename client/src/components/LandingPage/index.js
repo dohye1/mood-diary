@@ -13,8 +13,7 @@ const LandingPage = (props) =>{
     const [title, setTitle] = useState(new Date(Date.now()).getMonth() + 1)
     const [openModal, setOpenModal] = useState(false);
     const [pickDate, setPickDate] = useState(`${new Date(Date.now()).getFullYear()}-${
-      new Date(Date.now()).getMonth() + 1
-    }`); 
+      new Date(Date.now()).getMonth() + 1}-${new Date(Date.now()).getDate()}`); 
     const [monthOrYear, setMonthOrYear] = useState(true);
     const isAuth = useSelector((state)=>state.userReducer.isAuth);
     const user = useSelector((state)=>state.userReducer.user);
@@ -103,7 +102,7 @@ const LandingPage = (props) =>{
                 dateCellRender={dateCellRender}
                 monthCellRender={monthCellRender}
             />
-            <Modal date={pickDate} openModal={openModal}/>
+            <Modal date={pickDate} openModal={openModal} />
         </div>
     )
 }

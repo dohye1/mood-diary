@@ -33,7 +33,7 @@ function* getDiary({payload}){
     }
 }
 
-function* postNewDiary({payload}){
+function* postDiary({payload}){
     const result = yield axios.post("/api/diary", payload, {validateStatus : function (status){return status < 500}});
     try{
         const { status, data } = result;
@@ -48,9 +48,26 @@ function* postNewDiary({payload}){
     }
 }
 
+function* patchDiary({payload}){
+    const result = yield axios.patch("/api/diary", payload, {validateStatus : function (status){return status < 500}});
+    try{
+        const { status, data } = result;
+        if(status === 200){
+            yield alert(result.data.message);
+            yield put({type:EDIT_DIARY_SUCCESS, data});
+        }else{
+            throw new Error();
+        }
+    }catch(error){
+        yield alert(result.data.message)
+        yield put({type:EDIT_DIARY_FAILURE});
+    }
+}
+
 function* watchDiary(){
     yield takeEvery(DIARY_REQUEST, getDiary);
-    yield takeEvery(NEW_DIARY_REQUEST, postNewDiary);
+    yield takeEvery(NEW_DIARY_REQUEST, postDiary);
+    yield takeEvery(EDIT_DIARY_REQUEST, patchDiary);
 }
 
 export default function* diarySaga () {

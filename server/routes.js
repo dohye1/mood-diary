@@ -9,15 +9,13 @@ const AVATAR = '/avatar';
 
 //DIARY
 const API_DIARY = '/api/diary';
-const COUNT = "/count";
 
 const routes = {
   root:ROOT,
   apiUser : API_USER,
   login: LOGIN,
   avatar: AVATAR,
-  apiDiary: API_DIARY,
-  count : COUNT
+  apiDiary: API_DIARY
 };
 
 export default routes;

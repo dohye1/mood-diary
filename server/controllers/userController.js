@@ -61,7 +61,6 @@ export const patchUser = async(req, res) => {
     body: { name, selfPromise },
     user : { _doc, _id}
   } = req;
-  console.log(_doc);
   try {
     await User.findByIdAndUpdate({_id}, {name, selfPromise});
     return res.status(200).json({message:'', user:{..._doc, name, selfPromise}});  
