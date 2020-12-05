@@ -6,6 +6,8 @@ NEW_ME_SUCCESS,
 NEW_ME_FAILURE,
 LOGIN_SUCCESS,
 LOGIN_FAILURE,
+LOGOUT_SUCCESS,
+LOGOUT_FAILURE
 } from '../actions/types';
 
 const initState = {
@@ -34,12 +36,15 @@ const userReducer = ( state = initState , action) => {
         case ME_FAILURE :
             return { ...state };
         case EDIT_ME_SUCCESS :
-            console.log(action.data);
-            console.log('여기가 마지막에 실행되야함')
             state.user = action.data.user;
-            console.log(state.user);
             return { ...state };
         case EDIT_ME_FAILURE :
+            return { ...state };
+        case LOGOUT_SUCCESS :
+            state.user = {};
+            state.isAuth = null;
+            return { ...state };
+        case LOGOUT_FAILURE :
             return { ...state };
         default:
             return {...state};

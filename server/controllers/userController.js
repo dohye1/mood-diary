@@ -61,6 +61,7 @@ export const patchUser = async(req, res) => {
     body: { name, selfPromise },
     user : { _doc, _id}
   } = req;
+  console.log(_doc);
   try {
     await User.findByIdAndUpdate({_id}, {name, selfPromise});
     return res.status(200).json({message:'', user:{..._doc, name, selfPromise}});  
@@ -74,7 +75,7 @@ export const patchUser = async(req, res) => {
 export const getUser = (req, res)=>{
   const { user } = req;
   try { 
-    console.log(user);
+    //console.log(user);
     return res.status(200).json({message:'', user})
   }catch(error){
     console.log(error);
@@ -82,6 +83,17 @@ export const getUser = (req, res)=>{
 
   }
 }
+
+export const deleteUser = async(req, res) => {
+  const { user : { _id }} = req;
+  try{
+    await User.findByIdAndUpdate({_id}, {token:''});
+    return res.clearCookie('x_auth').status(200).json({message:'로그아웃이 성공적으로 완료되었습니다.'})
+  }catch(error){
+    console.log(error);
+    return res.status(400).json({message:'로그아웃에 실패했습니다'})
+  }
+};
 
 export const postAvatar = (req, res) => {
   /*try {
@@ -114,12 +126,4 @@ export const postAvatar = (req, res) => {
   } catch (error) {
     console.log(error);
   }*/
-};
-
-export const getLogout = (req, res) => {
- /* req.session.destroy(function () {
-    req.session; // db에있는 session이 지워짐
-  });
-  res.clearCookie('connect'); // 브라우저에있는 쿠키 세션이 지워짐
-  return res.status(200).send({ logout: 'success' });*/
 };

@@ -14,7 +14,8 @@ import {
     LOGIN_SUCCESS, 
     LOGIN_FAILURE,
     LOGOUT_SUCCESS, 
-    LOGOUT_FAILURE} from '../actions/types';
+    LOGOUT_FAILURE,
+    LOGOUT_REQUEST} from '../actions/types';
 
 function* postLogin({payload}){
     const result = yield axios.post("/api/user/login", payload, {validateStatus : function (status){return status < 500}});
@@ -79,11 +80,29 @@ function* postEditMe({payload}){
     }
 }
 
+function* deleteMe(){
+    const result = yield axios.delete("/api/user", {validateStatus : function (status){return status < 500}});
+    try{
+        const { status } = result;
+        if(status === 200){
+            yield alert(result.data.message);
+            yield localStorage.removeItem('user_token');
+            yield put({type:LOGOUT_SUCCESS});
+        }else{
+            throw new Error();
+        }
+    }catch(error){
+        yield alert(result.data.message);
+        yield put({type:LOGOUT_FAILURE});
+    }
+}
+
 function* watchUser(){
     yield takeEvery(NEW_ME_REQUEST, postNewMe);
     yield takeEvery(LOGIN_REQUEST, postLogin);
     yield takeEvery(ME_REQUEST, getMe);
     yield takeEvery(EDIT_ME_REQUEST, postEditMe);
+    yield takeLatest(LOGOUT_REQUEST, deleteMe);
 }
 
 export default function* userSaga () {

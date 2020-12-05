@@ -82,7 +82,6 @@ const LandingPage = (props) =>{
     }
 
     useEffect(()=>{
-        console.log('초기에 실행됨')
         if(isAuth === null){
             props.history.push('/login');
         }else{
@@ -91,7 +90,7 @@ const LandingPage = (props) =>{
                 dispatch(getMe())
             }
         }
-    },[]);
+    },[isAuth]);
 
     return (
         <div className="landing-container">
