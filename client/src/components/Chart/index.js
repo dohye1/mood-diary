@@ -1,21 +1,85 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import axios from 'axios';
 import { Pie } from 'react-chartjs-2';
 
-const Chart = () =>{
-  const [one, setOne] = useState(1);
-  const [two, setTwo] = useState(1);
-  const [three, setThree] = useState(1);
-  const [four, setFour] = useState(2);
-  const [five, setFive] = useState(2);
+const Chart = ({date, mode}) =>{
+  const diaries = useSelector(state=>state.diaryReducer.diaries);
+  const [count, setCount] = useState([0,0,0,0,0]);
+  const [prevDiaryLength, setPrevDiaryLength] = useState(diaries.length);
+  const getCount = () =>{
+    let one=0, two=0, three=0, four=0, five=0;
+    const splitDate = date.split("-");
+    console.log(date);
+    console.log('여긴 함수안');
+    console.log(mode);
+    if(mode){
+      console.log('월단위로 통계냄');
+      diaries.map(diary => {
+        if(diary.post_year===Number(splitDate[0]) && diary.post_month===Number(splitDate[1])) {
+          switch(Number(diary.mood)){
+            case 1:
+              one++;
+              break;
+            case 2:
+              two++;
+              break;
+            case 3:
+              three++;
+              break;
+            case 4:
+              four++;
+              break;
+            case 5:
+              five++;
+              break;
+            default:
+              break;
+          }
+      }
+    }
+  )}else{
+      console.log('년단위로 통계냄');
+      diaries.map(diary => {
+        if(diary.post_year===Number(splitDate[0])) {
+          switch(Number(diary.mood)){
+            case 1:
+              one++;
+              break;
+            case 2:
+              two++;
+              break;
+            case 3:
+              three++;
+              break;
+            case 4:
+              four++;
+              break;
+            case 5:
+              five++;
+              break;
+            default:
+              break;
+          }
+      }
+    })
+  }
+  setCount([one, two, three, four, five]);
+};
+
+  useEffect(()=>{
+    console.log("chart여기가 실행됐어!!");
+    if( prevDiaryLength !== diaries.length){
+      setPrevDiaryLength(diaries.length);
+    }
+    getCount();
+  },[date, mode]);
 
 const state = {
-    labels: ['SOOOO HAPPY', 'HAPPY', 'SOSO', 'BAD', 'CRAZY'],
+    labels: ['SOOOO HAPPY', 'HAPPY', 'SOSO', 'BAD', 'UPSET'],
     datasets: [
       {
         label: '# of Votes',
-        data: [one, two, three, four, five],
+        data: count,
         backgroundColor: [
           'rgba(255, 99, 132, 0.2)',
           'rgba(54, 162, 235, 0.2)',
@@ -45,21 +109,18 @@ const state = {
     return (
         <div className="chart-container">
              <Pie
-          data={state}
-          width={250}
-          height={100}
-          options={{
-            responsive: false,
-            maintainAspectRatio: false,
-            legend: {
-              display: false,
-              position: 'bottom'
-            }
-          }}
+                data={state}
+                width={250}
+                height={100}
+                options={{
+                  responsive: false,
+                  maintainAspectRatio: false,
+                  legend: {
+                    display: false,
+                    position: 'bottom'
+                  }
+                }}
         />
-        
-
-
         </div>
     )
 }

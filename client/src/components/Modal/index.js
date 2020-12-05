@@ -107,6 +107,7 @@ const ModalPage = ({ date, diaryInfo, openModal }) => {
               value='1'
               onClick={(e) => setMood(e.target.value)}
               className={mood === 1 ? 'listClicked' : ''}
+              title="sooooooooo happy"
             >
               😁
             </li>
@@ -114,6 +115,7 @@ const ModalPage = ({ date, diaryInfo, openModal }) => {
               value='2'
               onClick={(e) => setMood(e.target.value)}
               className={mood === 2 ? 'listClicked' : ''}
+              title="happy"
             >
               🌝
             </li>
@@ -121,6 +123,7 @@ const ModalPage = ({ date, diaryInfo, openModal }) => {
               value='3'
               onClick={(e) => setMood(e.target.value)}
               className={mood === 3 ? 'listClicked' : ''}
+              title="normal"
             >
               😐
             </li>
@@ -128,6 +131,7 @@ const ModalPage = ({ date, diaryInfo, openModal }) => {
               value='4'
               onClick={(e) => setMood(e.target.value)}
               className={mood === 4 ? 'listClicked' : ''}
+              title="sad"
             >
               😭
             </li>
@@ -135,8 +139,9 @@ const ModalPage = ({ date, diaryInfo, openModal }) => {
               value='5'
               onClick={(e) => setMood(e.target.value)}
               className={mood === 5 ? 'listClicked' : ''}
+              title="upset"
             >
-              😱
+              😡
             </li>
           </ul>
           <textarea

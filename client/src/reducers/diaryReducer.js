@@ -21,7 +21,7 @@ const userReducer = ( state = initState , action) => {
             state.diaries.push(action.data.diary)
             return { ...state };
         case NEW_DIARY_FAILURE :
-            return { ...state };     
+            return { ...state };
         case DIARY_SUCCESS :
             state.diaries = action.data.diaries;
             return { ...state };
