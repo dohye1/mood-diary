@@ -1,16 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {editMe} from '../../actions/userAction';
+import {changeBG} from '../../actions/globalAction';
 
 import './styles.scss';
 
 const SettingPage = (props) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.userReducer.user);
+  const colors = useSelector((state) => state.globalReducer.colors);
 
   const [name, setName] = useState(user.name);
   const [selfPromise, setSelfPromise] = useState(user.selfPromise);
-
+  const [leftColor, setLeftColor] = useState(colors[0]);
+  const [midColor, setMidColor] = useState(colors[1]);
+  const [rightColor, setRightColor] = useState(colors[2]);
   const handleProfile = (e) => {
     e.preventDefault();
     dispatch(editMe({
@@ -20,13 +24,14 @@ const SettingPage = (props) => {
 
   };
 
-//   useEffect(() => {
-//       setAvatar(userInfo.avatar);
-//       setNickname(userInfo.nickname);
-//       setEmail(userInfo.email);
-//       setPromise(userInfo.promise);
-//     });
+  const handleBG = (e) =>{
+    e.preventDefault();
+    dispatch(changeBG([leftColor, midColor, rightColor]));
+  }
 
+  useEffect(()=>{
+
+  },[colors])
   return (
     <div className='setting-container'>
         <div className="profile-box box">
@@ -59,12 +64,25 @@ const SettingPage = (props) => {
         <div className="bg-box box">
             <h2 className='page-title'>BG COLOR</h2>
             <hr />
-            <div className='user-info'>
-                <form className='info-form'>
-                   
-                </form>
+            <div className="color-pick-box">
+              <div className="color-pick">
+                <label htmlFor="left">LEFT</label>
+                <input type="color" id="left" name="left" value={leftColor} onChange={(e)=>setLeftColor(e.currentTarget.value)} />
+              </div>
+              <div className="color-pick">
+                <label htmlFor="mid">MIDDLE</label>
+                <input type="color" id="mid" name="mid" value={midColor} onChange={(e)=>setMidColor(e.currentTarget.value)} />
+              </div>
+              <div className="color-pick">
+                <label htmlFor="right">RIGHT</label>
+                <input type="color" id="right" name="right" value={rightColor} onChange={(e)=>setRightColor(e.currentTarget.value)}/>
+              </div>
             </div>
-        </div>
+            <div className="display-box" style={{"background":`linear-gradient(0.25turn,${leftColor}, ${midColor}, ${rightColor})`}}></div>
+            <button className='bg-btn' onClick={handleBG}>
+                  적용하기
+            </button>
+      </div>
     </div>
   );
 };

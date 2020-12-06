@@ -1,3 +1,8 @@
+// GLOBAL
+export const BG_REQUEST = 'BG_REQUEST' 
+export const BG_SUCCESS = 'BG_SUCCESS' 
+export const BG_FAILURE = 'BG_FAILURE' 
+
 // USER
 export const LOGIN_REQUEST = 'LOGIN_REQUEST'
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
@@ -18,10 +23,6 @@ export const EDIT_ME_FAILURE = 'EDIT_ME_FAILURE'
 export const NEW_ME_REQUEST = 'NEW_ME_REQUEST'
 export const NEW_ME_SUCCESS = 'NEW_ME_SUCCESS'
 export const NEW_ME_FAILURE = 'NEW_ME_FAILURE'
-
-export const AVATAR_REQUEST = 'AVATAR_REQUEST'
-export const AVATAR_SUCCESS = 'AVATAR_SUCCESS'
-export const AVATAR_FAILURE = 'AVATAR_FAILURE'
 
 // DIARY
 export const DIARY_REQUEST = 'DIARY_REQUEST'

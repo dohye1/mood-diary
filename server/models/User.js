@@ -14,9 +14,6 @@ const userSchema = new mongoose.Schema({
         type:String,
         required:true
     },
-    bg:{
-        type:String
-    },
     selfPromise:{
         type:String,
         default:''

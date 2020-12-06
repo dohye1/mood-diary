@@ -93,36 +93,3 @@ export const deleteUser = async(req, res) => {
     return res.status(400).json({message:'로그아웃에 실패했습니다'})
   }
 };
-
-export const postAvatar = (req, res) => {
-  /*try {
-    const file = req.file;
-    let avatarAdd;
-    let email;
-    if (file !== undefined) {
-      const {
-        file: { location },
-        session: { displayName }
-      } = req;
-      avatarAdd = location;
-      email = displayName;
-    } else {
-      const {
-        session: { displayName }
-      } = req;
-      email = displayName;
-      avatarAdd =
-        'https://iupac.org/wp-content/uploads/2018/05/default-avatar.png';
-    }
-    sql = `update user set avatar="${avatarAdd}" where email="${email}"`;
-    dbConnection.query(sql, (error, result) => {
-      if (error) {
-        return res.send({ register: 'fail' });
-      }
-      console.log(result);
-      return res.send({ avatarChange: 'success', avatarAdd });
-    });
-  } catch (error) {
-    console.log(error);
-  }*/
-};

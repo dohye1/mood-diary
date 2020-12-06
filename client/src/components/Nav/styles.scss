@@ -10,6 +10,7 @@
     justify-content: space-around;
     position: fixed;
     top:0;
+    transition: 0.5s;
     .side{
         width:40%;
         height:10vh;
@@ -58,5 +59,6 @@
     background-color: rgba(0,0,0,0.28);
 }
 .noTop{
-    background-color: rgba(124, 151, 169, 0.9);
+    background-color: rgba(76, 76, 76, 0.9);
+    transition: 0.5s;
 }

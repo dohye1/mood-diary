@@ -46,7 +46,45 @@
     .profile-box{
         display: flex;
         flex-direction: column;
-
     }
+    .bg-box{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .color-pick-box{
+            width:100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            input{
+                width:45px;
+                height:45px;
+                background-color: #c7c7c7;
+                border:none;
+                border-radius: 8px;
+                box-shadow: 2px 2px 10px 5px rgba(118, 118, 118, 0.517);
+            }
+            .color-pick{
+                width:80%;
+                display: flex;
+                justify-content: space-between;
+                margin:1vh 0;
+                label{
+                    font-size:1.4em;
+                    font-weight: 600;
+                    line-height: 45px;
+                }
+            }
+        }
+        .display-box{
+            width:100%;
+            height: 7rem;
+            margin-top:1em;
+            background-color: red;
 
+        }
+        button{
+            font-family: $kor;
+        }
+    }
 }
