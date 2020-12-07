@@ -5,18 +5,18 @@ import {
     EDIT_DIARY_FAILURE,
     NEW_DIARY_SUCCESS,
     NEW_DIARY_FAILURE,
-    DELETE_DIARY_SUCCESS,
-    DELETE_DIARY_FAILURE
 } from '../actions/types';
 
 const initState = {
-    diaries :[]
+    diaries :[],
+    isUpdated : null
 }
 
 const userReducer = ( state = initState , action) => {
     switch(action.type){
         case NEW_DIARY_SUCCESS :
             state.diaries.push(action.data.diary)
+            state.isUpdated = action.data.diary._id;
             return { ...state };
         case NEW_DIARY_FAILURE :
             return { ...state };
@@ -26,8 +26,9 @@ const userReducer = ( state = initState , action) => {
         case DIARY_FAILURE :
             return { ...state };      
         case EDIT_DIARY_SUCCESS :
-            const id = state.diaries.findIndex((diary, index) => {if(diary._id === action.data.diary._id){return true}});
+            const id = state.diaries.findIndex((diary) => {if(diary._id === action.data.diary._id){return true}});
             state.diaries[id] = action.data.diary;
+            state.isUpdated = action.data.diary._id;
             return { ...state };
         case EDIT_DIARY_FAILURE :
             return { ...state };    

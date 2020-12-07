@@ -21,6 +21,7 @@ const LandingPage = (props) =>{
     const isAuth = useSelector((state)=>state.userReducer.isAuth);
     const user = useSelector((state)=>state.userReducer.user);
     const diaries = useSelector(state=>state.diaryReducer.diaries);
+    const isUpdated = useSelector(state=>state.diaryReducer.isUpdated);
 
     // 구체적인 날짜가 선택되었을때 작동
     // 일기를 작성할때 사용
@@ -83,6 +84,7 @@ const LandingPage = (props) =>{
     }
 
     useEffect(()=>{
+        console.log(diaries.length);
         if(isAuth === null){
             props.history.push('/login');
         }else{
@@ -91,7 +93,7 @@ const LandingPage = (props) =>{
                 dispatch(getMe())
             }
         }
-    },[isAuth]);
+    },[isAuth, isUpdated]);
 
     return (
         <div className="landing-container">

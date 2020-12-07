@@ -6,7 +6,6 @@ const Chart = ({date, mode}) =>{
   const diaries = useSelector(state=>state.diaryReducer.diaries);
 
   const [count, setCount] = useState([0,0,0,0,0]);
-  const [prevDiaryLength, setPrevDiaryLength] = useState(diaries.length);
   
 const getCount = () =>{
     let one=0, two=0, three=0, four=0, five=0;
@@ -64,12 +63,8 @@ const getCount = () =>{
 };
 
   useEffect(()=>{
-    console.log(diaries.length, prevDiaryLength);
-    if( prevDiaryLength !== diaries.length){
-      setPrevDiaryLength(diaries.length);
-    }
     getCount();
-  },[date, mode, diaries]);
+  },[date, mode]);
 
 
 const state = {

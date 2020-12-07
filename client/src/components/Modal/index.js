@@ -101,7 +101,7 @@ const ModalPage = ({ date, openModal }) => {
               value='1'
               onClick={(e) => setMood(`${e.target.value}`)}
               className={mood === "1" ? 'listClicked' : ''}
-              title="sooooooooo happy"
+              title="SOOOO HAPPY"
             >
               😁
             </li>
@@ -109,7 +109,7 @@ const ModalPage = ({ date, openModal }) => {
               value='2'
               onClick={(e) => setMood(`${e.target.value}`)}
               className={mood === "2" ? 'listClicked' : ''}
-              title="happy"
+              title="=HAPPY"
             >
               🌝
             </li>
@@ -117,7 +117,7 @@ const ModalPage = ({ date, openModal }) => {
               value='3'
               onClick={(e) => setMood(`${e.target.value}`)}
               className={mood === "3" ? 'listClicked' : ''}
-              title="normal"
+              title="SOSO"
             >
               😐
             </li>
@@ -125,7 +125,7 @@ const ModalPage = ({ date, openModal }) => {
               value='4'
               onClick={(e) => setMood(`${e.target.value}`)}
               className={mood === "4" ? 'listClicked' : ''}
-              title="sad"
+              title="BAD"
             >
               😭
             </li>
@@ -133,7 +133,7 @@ const ModalPage = ({ date, openModal }) => {
               value='5'
               onClick={(e) => setMood(`${e.target.value}`)}
               className={mood === "5" ? 'listClicked' : ''}
-              title="upset"
+              title="UPSET"
             >
               😡
             </li>
