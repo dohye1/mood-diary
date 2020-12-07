@@ -10,11 +10,13 @@ import "./styles.scss";
 
 const LandingPage = (props) =>{
     const dispatch = useDispatch();
+    const icon = ["😁", "🌝", "😐", "😭", "😡"];
     const [title, setTitle] = useState(new Date(Date.now()).getMonth() + 1)
     const [openModal, setOpenModal] = useState(false);
     const [pickDate, setPickDate] = useState(`${new Date(Date.now()).getFullYear()}-${
       new Date(Date.now()).getMonth() + 1}-${new Date(Date.now()).getDate()}`); 
     const [monthOrYear, setMonthOrYear] = useState(true);
+
     const isAuth = useSelector((state)=>state.userReducer.isAuth);
     const user = useSelector((state)=>state.userReducer.user);
     const diaries = useSelector(state=>state.diaryReducer.diaries);
@@ -34,7 +36,6 @@ const LandingPage = (props) =>{
         console.log('패널이바뀜');
         console.log(value.format('YYYY-MM-DD'));
     }
-
 
     const dateCellRender = (value) =>{
         let dateItem;
@@ -72,12 +73,11 @@ const LandingPage = (props) =>{
         monthItem.sort((a, b)=>Number(a.post_day) - Number(b.post_day));
         if (monthItem.length > 0){
             return monthItem.map((diary)=> 
-            <>
-                <div>{diary.post_day}</div>
-                <div>{diary.mood}</div>
-                <div>{diary.content}</div>
-            </>)
-        }
+            <div className="year-box">
+                <p><b>{diary.post_day}</b><span>{icon[diary.mood]}</span></p>
+                <p>{diary.content}</p>
+            </div>
+        )}
     }
 
     useEffect(()=>{

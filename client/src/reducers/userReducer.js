@@ -12,6 +12,7 @@ LOGOUT_FAILURE
 
 const initState = {
     register : false,
+    login : false,
     isAuth : localStorage.getItem('user_token'),
     user : {}
 }
@@ -27,6 +28,7 @@ const userReducer = ( state = initState , action) => {
         case LOGIN_SUCCESS :
             state.user = action.data.user;
             state.isAuth = action.data.user.token;
+            state.login = true;
             return { ...state };
         case LOGIN_FAILURE :
             return { ...state };
@@ -43,6 +45,7 @@ const userReducer = ( state = initState , action) => {
         case LOGOUT_SUCCESS :
             state.user = {};
             state.isAuth = null;
+            state.login = false;
             return { ...state };
         case LOGOUT_FAILURE :
             return { ...state };

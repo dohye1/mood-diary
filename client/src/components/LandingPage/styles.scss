@@ -3,7 +3,7 @@
 .landing-container{
     width:60%;
     min-height:80vh;
-    margin-top:13vh;
+    margin:13vh 0;
     background-color: rgba(102, 102, 105, 0.2);
     border-radius: 10px;
     padding:1.3em;
@@ -12,13 +12,14 @@
     align-items: center;
     justify-content: flex-start;
     .title{
-        font-family: $eng;
+        font-family: $kor_hand;
     }
     .self-promise{
-        font-family: $kor;
+        font-family: $kor_hand;
+        font-weight: 600;
     }
     .ant-picker-calendar-header{
-        margin-top: 0px;
+        margin-top: 2em;
         padding-top:0px;
         justify-content: flex-start;
     }
@@ -27,5 +28,15 @@
     }
     .ant-picker-calendar-full .ant-picker-panel{
         background-color: rgba($color: #000000, $alpha: 0.0);
+    }
+    .ant-picker-calendar-date-content{
+        font-family:$kor_hand
+    }
+    .year-box{
+        font-family: $kor;
+        font-size:0.8rem;
+        span{
+            margin-left:5px;
+        }
     }
 }

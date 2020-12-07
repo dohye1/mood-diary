@@ -4,16 +4,14 @@ import { Pie } from 'react-chartjs-2';
 
 const Chart = ({date, mode}) =>{
   const diaries = useSelector(state=>state.diaryReducer.diaries);
+
   const [count, setCount] = useState([0,0,0,0,0]);
   const [prevDiaryLength, setPrevDiaryLength] = useState(diaries.length);
-  const getCount = () =>{
+  
+const getCount = () =>{
     let one=0, two=0, three=0, four=0, five=0;
     const splitDate = date.split("-");
-    console.log(date);
-    console.log('여긴 함수안');
-    console.log(mode);
     if(mode){
-      console.log('월단위로 통계냄');
       diaries.map(diary => {
         if(diary.post_year===Number(splitDate[0]) && diary.post_month===Number(splitDate[1])) {
           switch(Number(diary.mood)){
@@ -38,7 +36,6 @@ const Chart = ({date, mode}) =>{
       }
     }
   )}else{
-      console.log('년단위로 통계냄');
       diaries.map(diary => {
         if(diary.post_year===Number(splitDate[0])) {
           switch(Number(diary.mood)){
@@ -68,11 +65,13 @@ const Chart = ({date, mode}) =>{
 
   useEffect(()=>{
     console.log("chart여기가 실행됐어!!");
+    console.log(diaries.length, prevDiaryLength);
     if( prevDiaryLength !== diaries.length){
       setPrevDiaryLength(diaries.length);
     }
     getCount();
-  },[date, mode]);
+  },[date, mode, diaries]);
+
 
 const state = {
     labels: ['SOOOO HAPPY', 'HAPPY', 'SOSO', 'BAD', 'UPSET'],

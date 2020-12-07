@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {editMe} from '../../actions/userAction';
+import { getMe, editMe} from '../../actions/userAction';
 import {changeBG} from '../../actions/globalAction';
 
 import './styles.scss';
@@ -9,6 +9,7 @@ const SettingPage = (props) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.userReducer.user);
   const colors = useSelector((state) => state.globalReducer.colors);
+  const isAuth = useSelector(state=>state.userReducer.isAuth);
 
   const [name, setName] = useState(user.name);
   const [selfPromise, setSelfPromise] = useState(user.selfPromise);
@@ -30,8 +31,18 @@ const SettingPage = (props) => {
   }
 
   useEffect(()=>{
+         if(isAuth === null){
+            props.history.push('/login');
+        }else{
+            if(Object.keys(user).length === 0){
+                dispatch(getMe())
+            }else{
+              setName(user.name);
+              setSelfPromise(user.selfPromise)
+            }
+        }
+  },[colors, user])
 
-  },[colors])
   return (
     <div className='setting-container'>
         <div className="profile-box box">

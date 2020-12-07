@@ -11,6 +11,7 @@
     position: fixed;
     top:0;
     transition: 0.5s;
+    z-index:999;
     .side{
         width:40%;
         height:10vh;
