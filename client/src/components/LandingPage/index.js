@@ -10,13 +10,14 @@ import "./styles.scss";
 
 const LandingPage = (props) =>{
     const dispatch = useDispatch();
+
     const icon = ["😁", "🌝", "😐", "😭", "😡"];
+    let changeMonth = false;  // month를 선택하면 모달이 자동으로 열리는것을 방지하기 위한 플래그
     const [title, setTitle] = useState(new Date(Date.now()).getMonth() + 1)
     const [openModal, setOpenModal] = useState(false);
     const [pickDate, setPickDate] = useState(`${new Date(Date.now()).getFullYear()}-${
       new Date(Date.now()).getMonth() + 1}-${new Date(Date.now()).getDate()}`); 
     const [monthOrYear, setMonthOrYear] = useState(true);
-
     const isAuth = useSelector((state)=>state.userReducer.isAuth);
     const user = useSelector((state)=>state.userReducer.user);
     const diaries = useSelector(state=>state.diaryReducer.diaries);
@@ -25,16 +26,17 @@ const LandingPage = (props) =>{
     // 일기를 작성할때 사용
     const onSelect = async(value) =>{
         setPickDate(value.format('YYYY-MM-DD'));   
-        await setOpenModal(true);
-        setOpenModal(false);
-        console.log(789);
+        if(!changeMonth){
+            await setOpenModal(true);
+            setOpenModal(false);
+        }
     }
 
     // 년과 월이 서로 변경될때 작동
     // 이때 선택된 패널의 데이터를 가져오면 될듯
     const onPanelChange = async(value) =>{
-        console.log('패널이바뀜');
-        console.log(value.format('YYYY-MM-DD'));
+        setOpenModal(false);
+        changeMonth = true;
     }
 
     const dateCellRender = (value) =>{

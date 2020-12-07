@@ -64,7 +64,6 @@ const getCount = () =>{
 };
 
   useEffect(()=>{
-    console.log("chart여기가 실행됐어!!");
     console.log(diaries.length, prevDiaryLength);
     if( prevDiaryLength !== diaries.length){
       setPrevDiaryLength(diaries.length);
