@@ -62,9 +62,9 @@ const getCount = () =>{
   setCount([one, two, three, four, five]);
 };
 
-  useEffect(()=>{
-    getCount();
-  },[date, mode]);
+useEffect(()=>{
+  getCount();
+},[date, mode, diaries]);
 
 
 const state = {

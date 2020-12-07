@@ -1,4 +1,4 @@
-import {ME_REQUEST, EDIT_ME_REQUEST, NEW_ME_REQUEST, BG_REQUEST, LOGIN_REQUEST, LOGOUT_REQUEST} from './types';
+import {ME_REQUEST, EDIT_ME_REQUEST, NEW_ME_REQUEST, LOGIN_REQUEST, LOGOUT_REQUEST} from './types';
 
 export const getMe = () => ({
     type: ME_REQUEST
@@ -12,11 +12,6 @@ export const editMe = (userInfo) => ({
 export const newUser = (userInfo) => ({
     type: NEW_ME_REQUEST,
     payload: userInfo
-})
-
-export const chooseBG = (bgInfo) => ({
-    type: BG_REQUEST,
-    payload: bgInfo
 })
 
 export const login = (userInfo) => ({

@@ -45,7 +45,3 @@ export const patchDiary = async(req, res)=>{
     return res.status(400).json({diary:{...edittedDiary._doc, mood, content}, message : '수정하지 못했습니다\n다시 시도해주세요'});      
   }
 }
-
-export const deleteDiary = async(req, res)=>{
-
-}

@@ -1,5 +1,4 @@
-import {all, fork, takeEvery, takeLatest, put, call} from 'redux-saga/effects';
-import axios from 'axios';
+import {all, fork, takeEvery,put} from 'redux-saga/effects';
 import { BG_REQUEST, BG_SUCCESS, BG_FAILURE} from '../actions/types';
 
 
@@ -12,7 +11,6 @@ function* changeBG({payload}){
         yield put({type:BG_FAILURE});
     }
 }
-
 
 function* watchGlobal(){
     yield takeEvery(BG_REQUEST, changeBG);

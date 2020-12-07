@@ -1,4 +1,4 @@
-import {all, fork, takeEvery, takeLatest, put, call} from 'redux-saga/effects';
+import {all, fork, takeEvery, put} from 'redux-saga/effects';
 import axios from 'axios';
 import {
     DIARY_REQUEST,
@@ -9,13 +9,7 @@ import {
     EDIT_DIARY_FAILURE,
     NEW_DIARY_REQUEST,
     NEW_DIARY_SUCCESS,
-    NEW_DIARY_FAILURE,
-    DELETE_DIARY_REQUEST,
-    DELETE_DIARY_SUCCESS,
-    DELETE_DIARY_FAILURE,
-    COUNT_REQUEST,
-    COUNT_SUCCESS,
-    COUNT_FAILURE
+    NEW_DIARY_FAILURE
 } from '../actions/types';
 
 function* getDiary({payload}){
