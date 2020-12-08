@@ -13,7 +13,7 @@ import {
 } from '../actions/types';
 
 function* getDiary(){
-    const result = yield axios.get("/api/diary", {headers: {local_token:localStorage.getItem("user_token")}},{validateStatus : function (status){return status < 500}});
+    const result = yield axios.get("/api/diary", {headers: {local_token:localStorage.getItem("user_token")}, validateStatus : function (status){return status < 500}});
     try{
         const { status, data } = result;
         if(status === 200){
@@ -28,7 +28,7 @@ function* getDiary(){
 }
 
 function* postDiary({payload}){
-    const result = yield axios.post("/api/diary", payload, {validateStatus : function (status){return status < 500}});
+    const result = yield axios.post("/api/diary", payload, {headers: {local_token:localStorage.getItem("user_token")}, validateStatus : function (status){return status < 500}});
     try{
         const { status, data } = result;
         if(status === 201){
@@ -43,7 +43,7 @@ function* postDiary({payload}){
 }
 
 function* patchDiary({payload}){
-    const result = yield axios.patch("/api/diary", payload, {validateStatus : function (status){return status < 500}});
+    const result = yield axios.patch("/api/diary", payload, {headers: {local_token:localStorage.getItem("user_token")}, validateStatus : function (status){return status < 500}});
     try{
         const { status, data } = result;
         if(status === 200){

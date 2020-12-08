@@ -18,7 +18,7 @@ import {
     LOGOUT_REQUEST} from '../actions/types';
 
 function* postLogin({payload}){
-    const result = yield axios.post("/api/user/login", payload, {validateStatus : function (status){return status < 500}});
+    const result = yield axios.post("/api/user/login", payload, {headers: {local_token:localStorage.getItem("user_token")}, validateStatus : function (status){return status < 500}});
     try{
         const { status, data } = result;
         if(status === 200){
@@ -50,7 +50,7 @@ function* postNewMe({payload}){
 }
 
 function* getMe(){
-    const result = yield axios.get("/api/user", {headers: {local_token:localStorage.getItem("user_token")}},{validateStatus : function (status){return status < 500}});
+    const result = yield axios.get("/api/user", {headers: {local_token:localStorage.getItem("user_token")}, validateStatus : function (status){return status < 500}});
     try{
         const { status, data } = result;
         if(status === 200){
@@ -65,7 +65,7 @@ function* getMe(){
 }
 
 function* postEditMe({payload}){
-    const result = yield axios.patch("/api/user", payload, {validateStatus : function (status){return status < 500}});
+    const result = yield axios.patch("/api/user", payload, {headers: {local_token:localStorage.getItem("user_token")}, validateStatus : function (status){return status < 500}});
     try{
         const { status, data } = result;
         if(status === 200){
@@ -81,7 +81,7 @@ function* postEditMe({payload}){
 }
 
 function* deleteMe(){
-    const result = yield axios.delete("/api/user", {headers: {local_token:localStorage.getItem("user_token")}}, {validateStatus : function (status){return status < 500}});
+    const result = yield axios.delete("/api/user", {headers: {local_token:localStorage.getItem("user_token")}, validateStatus : function (status){return status < 500}});
     try{
         const { status } = result;
         if(status === 200){
