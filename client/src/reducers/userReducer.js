@@ -13,8 +13,8 @@ LOGOUT_FAILURE
 const initState = {
     register : false,
     login : false,
-    isAuth : localStorage.getItem('user_token'),
-    user : {}
+    user : {},
+    isAuth : localStorage.getItem('user_token')
 }
 
 const userReducer = ( state = initState , action) => {

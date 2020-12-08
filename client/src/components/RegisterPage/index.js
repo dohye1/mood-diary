@@ -7,7 +7,7 @@ import "./styles.scss";
 
 const RegisterPage = (props) =>{
     const dispatch = useDispatch();
-    const registerResult = useSelector((state)=>state.userReducer.register);
+    const register = useSelector((state)=>state.userReducer.register);
 
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -19,8 +19,6 @@ const RegisterPage = (props) =>{
     const [pwCss, setPwCss] = useState('');
     const [confirmPwCss, setConfirmPwCss] = useState('');
 
-
-    console.log(registerResult);
 
         const handleClick = (e) => {
         e.preventDefault();
@@ -67,7 +65,7 @@ const RegisterPage = (props) =>{
     };
 
     useEffect(()=>{
-        if(registerResult){
+        if(register){
             props.history.push('/login');
         }
     })

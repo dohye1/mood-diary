@@ -11,6 +11,7 @@ const LoginPage = (props) => {
     const [emailCss, setEmailCss] = useState('');
     const [pwCss, setPwCss] = useState('');
 
+    // login이라는 action 이 있어서 loginResult라고 정함
     const isAuth = useSelector((state)=>state.userReducer.isAuth);
 
     const handleClick = (e) => {

@@ -73,13 +73,11 @@ export const patchUser = async(req, res) => {
 
 export const getUser = (req, res)=>{
   const { user } = req;
-  try { 
-    //console.log(user);
+  try {
     return res.status(200).json({message:'', user})
   }catch(error){
     console.log(error);
     return res.status(404).json({message:'사용자 정보를 얻는데에 실패했습니다', user: {}})
-
   }
 }
 

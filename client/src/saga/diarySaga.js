@@ -12,8 +12,8 @@ import {
     NEW_DIARY_FAILURE
 } from '../actions/types';
 
-function* getDiary({payload}){
-    const result = yield axios.get("/api/diary", {validateStatus : function (status){return status < 500}});
+function* getDiary(){
+    const result = yield axios.get("/api/diary", {headers: {local_token:localStorage.getItem("user_token")}},{validateStatus : function (status){return status < 500}});
     try{
         const { status, data } = result;
         if(status === 200){

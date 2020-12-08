@@ -50,9 +50,9 @@ function* postNewMe({payload}){
 }
 
 function* getMe(){
-    const result = yield axios.get("/api/user", {validateStatus : function (status){return status < 500}});
+    const result = yield axios.get("/api/user", {headers: {local_token:localStorage.getItem("user_token")}},{validateStatus : function (status){return status < 500}});
     try{
-        const { status, data} = result;
+        const { status, data } = result;
         if(status === 200){
             yield put({type:ME_SUCCESS, data});
         }else{
@@ -81,7 +81,7 @@ function* postEditMe({payload}){
 }
 
 function* deleteMe(){
-    const result = yield axios.delete("/api/user", {validateStatus : function (status){return status < 500}});
+    const result = yield axios.delete("/api/user", {headers: {local_token:localStorage.getItem("user_token")}}, {validateStatus : function (status){return status < 500}});
     try{
         const { status } = result;
         if(status === 200){

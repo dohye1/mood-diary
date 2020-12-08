@@ -85,13 +85,13 @@ const LandingPage = (props) =>{
 
     useEffect(()=>{
         console.log(diaries.length);
-        if(isAuth === null){
-            props.history.push('/login');
+        if(!isAuth){
+            props.history.push("/login");
         }else{
-            dispatch(getDiary());
             if(Object.keys(user).length === 0){
                 dispatch(getMe())
             }
+            dispatch(getDiary());
         }
     },[isAuth, isUpdated]);
 

@@ -31,10 +31,10 @@ const SettingPage = (props) => {
   }
 
   useEffect(()=>{
-         if(isAuth === null){
-            props.history.push('/login');
+        if(!isAuth){
+            props.history.push("/login");
         }else{
-            if(Object.keys(user).length === 0){
+           if(Object.keys(user).length === 0){
                 dispatch(getMe())
             }else{
               setName(user.name);
