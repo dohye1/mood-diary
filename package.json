@@ -4,8 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --exec babel-node server/index.js --delay 2",
-    "dev": "concurrently \"npm start\"  \"npm start --prefix client\""
+    "start": "node server/index.js",
+    "nodemon" : "nodemon --exec babel-node server/index.js --delay 2",
+    "dev": "concurrently \"npm run nodemon\"  \"npm start --prefix client\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "author": "",
   "license": "ISC",
