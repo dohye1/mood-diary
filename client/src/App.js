@@ -1,4 +1,4 @@
-import './App.scss';
+import React from 'react';
 import Nav from './components/Nav';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import BG from './components/BG';
@@ -7,6 +7,7 @@ import RegisterPage from './components/RegisterPage';
 import LoginPage from './components/LoginPage';
 import SettingPage from './components/SettingPage';
 
+import './App.scss';
 function App() {
   return (
     <div className="App"> 
