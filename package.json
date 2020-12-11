@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "babel-node  server/index.js",
+    "start": "babel-node server/index.js",
     "nodemon" : "nodemon --exec babel-node server/index.js --delay 2",
     "dev": "concurrently \"npm run nodemon\"  \"npm start --prefix client\""
   },
