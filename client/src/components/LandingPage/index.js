@@ -27,7 +27,7 @@ const LandingPage = (props) =>{
     // 일기를 작성할때 사용
     const onSelect = async(value) =>{
         setPickDate(value.format('YYYY-MM-DD'));   
-        if(!changeMonth){
+        if(!changeMonth && monthOrYear){
             await setOpenModal(true);
             setOpenModal(false);
         }

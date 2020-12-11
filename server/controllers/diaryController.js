@@ -29,7 +29,7 @@ export const postDiary = async (req, res) => {
     return res.status(201).json({  message : '', diary : newDiary})
   } catch (error) {
     console.error(error);
-    return res.status(201).json({ message : '다이어리 작성에 실패했습니다\n다시 시도해주세요', diary : {} });
+    return res.status(409).json({ message : '다이어리 작성에 실패했습니다\n다시 시도해주세요', diary : {} });
   }
 };
 
