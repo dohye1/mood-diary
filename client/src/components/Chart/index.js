@@ -2,18 +2,25 @@ import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Pie } from 'react-chartjs-2';
 
-const Chart = ({date, mode}) =>{
-  const diaries = useSelector(state=>state.diaryReducer.diaries);
+const Chart = ({ date, mode }) => {
+  const diaries = useSelector((state) => state.diaryReducer.diaries);
 
-  const [count, setCount] = useState([0,0,0,0,0]);
-  
-const getCount = () =>{
-    let one=0, two=0, three=0, four=0, five=0;
-    const splitDate = date.split("-");
-    if(mode){
-      diaries.map(diary => {
-        if(diary.post_year===Number(splitDate[0]) && diary.post_month===Number(splitDate[1])) {
-          switch(Number(diary.mood)){
+  const [count, setCount] = useState([0, 0, 0, 0, 0]);
+
+  const getCount = () => {
+    let one = 0,
+      two = 0,
+      three = 0,
+      four = 0,
+      five = 0;
+    const splitDate = date.split('-');
+    if (mode) {
+      diaries.map((diary) => {
+        if (
+          diary.post_year === Number(splitDate[0]) &&
+          diary.post_month === Number(splitDate[1])
+        ) {
+          switch (Number(diary.mood)) {
             case 1:
               one++;
               break;
@@ -32,42 +39,41 @@ const getCount = () =>{
             default:
               break;
           }
-      }
+        }
+      });
+    } else {
+      diaries.map((diary) => {
+        if (diary.post_year === Number(splitDate[0])) {
+          switch (Number(diary.mood)) {
+            case 1:
+              one++;
+              break;
+            case 2:
+              two++;
+              break;
+            case 3:
+              three++;
+              break;
+            case 4:
+              four++;
+              break;
+            case 5:
+              five++;
+              break;
+            default:
+              break;
+          }
+        }
+      });
     }
-  )}else{
-      diaries.map(diary => {
-        if(diary.post_year===Number(splitDate[0])) {
-          switch(Number(diary.mood)){
-            case 1:
-              one++;
-              break;
-            case 2:
-              two++;
-              break;
-            case 3:
-              three++;
-              break;
-            case 4:
-              four++;
-              break;
-            case 5:
-              five++;
-              break;
-            default:
-              break;
-          }
-      }
-    })
-  }
-  setCount([one, two, three, four, five]);
-};
+    setCount([one, two, three, four, five]);
+  };
 
-useEffect(()=>{
-  getCount();
-},[date, mode, diaries]);
+  useEffect(() => {
+    getCount();
+  }, [date, mode, diaries]);
 
-
-const state = {
+  const state = {
     labels: ['SOOOO HAPPY', 'HAPPY', 'SOSO', 'BAD', 'UPSET'],
     datasets: [
       {
@@ -99,23 +105,23 @@ const state = {
     ]
   };
 
-    return (
-        <div className="chart-container">
-             <Pie
-                data={state}
-                width={250}
-                height={100}
-                options={{
-                  responsive: false,
-                  maintainAspectRatio: false,
-                  legend: {
-                    display: false,
-                    position: 'bottom'
-                  }
-                }}
-        />
-        </div>
-    )
-}
+  return (
+    <div className='chart-container'>
+      <Pie
+        data={state}
+        width={250}
+        height={100}
+        options={{
+          responsive: false,
+          maintainAspectRatio: false,
+          legend: {
+            display: false,
+            position: 'bottom'
+          }
+        }}
+      />
+    </div>
+  );
+};
 
 export default Chart;

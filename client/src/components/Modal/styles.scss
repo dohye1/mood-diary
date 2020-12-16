@@ -1,59 +1,58 @@
-.modal-container{
-  .ant-modal{
-    top:200px;
+.modal-container {
+  .ant-modal {
+    top: 200px;
   }
-  .form-diary{
-    width:100%;
+  .form-diary {
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    .mood{
-      width:80%;
+    .mood {
+      width: 80%;
       display: flex;
       flex-direction: row;
       align-items: center;
       justify-content: space-between;
-      height:40px;
-      padding:0;
-      li{
-        font-size:25px;
+      height: 40px;
+      padding: 0;
+      li {
+        font-size: 25px;
         list-style: none;
-        text-align:center;
-        width:20%;
+        text-align: center;
+        width: 20%;
       }
-      .listClicked{
-        font-size:35px;
+      .listClicked {
+        font-size: 35px;
       }
     }
-    textarea{
-      width:80%;
-      height:370px;
+    textarea {
+      width: 80%;
+      height: 370px;
       overflow-y: scroll;
-      resize:none;
-      padding:10px;
-      border:none;
+      resize: none;
+      padding: 10px;
+      border: none;
       font-size: 17px;
-      background-color: rgba($color: #ececec, $alpha: 1.0);
+      background-color: rgba($color: #ececec, $alpha: 1);
     }
-    .button-wrap{
-      margin-top:40px;
-      width:60%;
+    .button-wrap {
+      margin-top: 40px;
+      width: 60%;
       display: flex;
       flex-direction: row;
       align-items: center;
       justify-content: space-around;
-      .button{
-        width:80px;
-        height:50px;
-        border:none;
+      .button {
+        width: 80px;
+        height: 50px;
+        border: none;
         border-radius: 5px;
         background-color: rgb(235, 225, 214);
-        color:rgba(105, 105, 105, 0.666);
-        font-size:15px;
+        color: rgba(105, 105, 105, 0.666);
+        font-size: 15px;
         font-weight: 500;
       }
     }
   }
-
 }

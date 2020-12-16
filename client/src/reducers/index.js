@@ -4,7 +4,9 @@ import diaryReducer from './diaryReducer';
 import globalReducer from './globalReducer';
 
 const rootReducer = combineReducers({
-    userReducer, diaryReducer, globalReducer
+  userReducer,
+  diaryReducer,
+  globalReducer
 });
 
 export default rootReducer;

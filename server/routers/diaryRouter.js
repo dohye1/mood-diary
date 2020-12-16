@@ -1,7 +1,11 @@
 import express from 'express';
-import {auth} from '../middleware';
+import { auth } from '../middleware';
 import routes from '../routes';
-import { getDiary, postDiary, patchDiary } from '../controllers/diaryController';
+import {
+  getDiary,
+  postDiary,
+  patchDiary
+} from '../controllers/diaryController';
 
 const diaryRouter = express.Router();
 

@@ -21,21 +21,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-app.use("/", express.static(path.join(__dirname, "../client/build")));
-if (process.env.NODE_ENV === "production") {
-//"client/build"는 react의 build파일 경로이다
- 
-
-//"..client"는 react 프로젝트의 파일 경로, "build"는 react프로젝트 내의 build폴더이다
-  
-}
+app.use('/', express.static(path.join(__dirname, '../client/build')));
 
 app.use(routes.apiDiary, diaryRouter);
 app.use(routes.apiUser, userRouter);
-
-app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "../client", "build", "static", "index.html"));
-  });
 
 app.listen(PORT, () => {
   console.log(`✅ Listening on port: ${PORT}`);

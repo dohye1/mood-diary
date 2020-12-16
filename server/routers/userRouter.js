@@ -2,7 +2,13 @@ import express from 'express';
 import routes from '../routes';
 import { auth } from '../middleware';
 
-import { getUser, patchUser, postUser, postLogin, deleteUser } from '../controllers/userController';
+import {
+  getUser,
+  patchUser,
+  postUser,
+  postLogin,
+  deleteUser
+} from '../controllers/userController';
 
 const userRouter = express.Router();
 

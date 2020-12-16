@@ -12,33 +12,38 @@ const ModalPage = ({ date, openModal }) => {
   const [content, setContent] = useState('');
   const [isEditDiary, setIsEditDiary] = useState(false); // true면 글을 수정하는것, false면 글을 처음쓰는것
   const [diaryId, setDiaryId] = useState('');
-  const diaries = useSelector(state=>state.diaryReducer.diaries);
+  const diaries = useSelector((state) => state.diaryReducer.diaries);
 
-  const findDiaryData = () =>{
+  const findDiaryData = () => {
     console.log(diaries);
-    console.log('이거좀실행되라ㅡㅡ')
+    console.log('이거좀실행되라ㅡㅡ');
     const splitedDate = date.split('-');
-    
+
     let dayInfo = [];
-    dayInfo = diaries &&
+    dayInfo =
+      diaries &&
       diaries.filter((item) => {
-        if (item.post_year === Number(splitedDate[0]) && item.post_month === Number(splitedDate[1]) && item.post_day === Number(splitedDate[2])) {
+        if (
+          item.post_year === Number(splitedDate[0]) &&
+          item.post_month === Number(splitedDate[1]) &&
+          item.post_day === Number(splitedDate[2])
+        ) {
           return true;
         }
       });
-    if(dayInfo !== null){
-      if(dayInfo.length > 0){
+    if (dayInfo !== null) {
+      if (dayInfo.length > 0) {
         setIsEditDiary(true);
         setMood(dayInfo[0].mood);
         setContent(dayInfo[0].content);
         setDiaryId(dayInfo[0]._id);
-      }else{
+      } else {
         setIsEditDiary(false);
-        setMood("");
-        setContent("");
+        setMood('');
+        setContent('');
       }
     }
-  }
+  };
 
   const handleOk = (e) => {
     e.preventDefault();
@@ -55,20 +60,22 @@ const ModalPage = ({ date, openModal }) => {
     setContent('');
 
     if (isEditDiary) {
-        dispatch(editDiary({
+      dispatch(
+        editDiary({
           diaryId,
           mood,
           content
         })
-      )
+      );
     } else {
-        dispatch(newDiary({
-            date,
-            mood,
-            content
-          })
-        )
-      }
+      dispatch(
+        newDiary({
+          date,
+          mood,
+          content
+        })
+      );
+    }
   };
 
   const handleCancel = () => {
@@ -83,7 +90,7 @@ const ModalPage = ({ date, openModal }) => {
       setVisible(true);
       findDiaryData();
     }
-  },[openModal]);
+  }, [openModal]);
 
   return (
     <>
@@ -100,40 +107,40 @@ const ModalPage = ({ date, openModal }) => {
             <li
               value='1'
               onClick={(e) => setMood(`${e.target.value}`)}
-              className={mood === "1" ? 'listClicked' : ''}
-              title="SOOOO HAPPY"
+              className={mood === '1' ? 'listClicked' : ''}
+              title='SOOOO HAPPY'
             >
               😁
             </li>
             <li
               value='2'
               onClick={(e) => setMood(`${e.target.value}`)}
-              className={mood === "2" ? 'listClicked' : ''}
-              title="=HAPPY"
+              className={mood === '2' ? 'listClicked' : ''}
+              title='=HAPPY'
             >
               🌝
             </li>
             <li
               value='3'
               onClick={(e) => setMood(`${e.target.value}`)}
-              className={mood === "3" ? 'listClicked' : ''}
-              title="SOSO"
+              className={mood === '3' ? 'listClicked' : ''}
+              title='SOSO'
             >
               😐
             </li>
             <li
               value='4'
               onClick={(e) => setMood(`${e.target.value}`)}
-              className={mood === "4" ? 'listClicked' : ''}
-              title="BAD"
+              className={mood === '4' ? 'listClicked' : ''}
+              title='BAD'
             >
               😭
             </li>
             <li
               value='5'
               onClick={(e) => setMood(`${e.target.value}`)}
-              className={mood === "5" ? 'listClicked' : ''}
-              title="UPSET"
+              className={mood === '5' ? 'listClicked' : ''}
+              title='UPSET'
             >
               😡
             </li>

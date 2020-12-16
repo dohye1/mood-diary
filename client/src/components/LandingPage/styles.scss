@@ -1,42 +1,44 @@
 @import '../utils/variables';
 
-.landing-container{
-    width:60%;
-    min-height:80vh;
-    margin:13vh 0;
-    background-color: rgba(118, 118, 118, 0.3);
-    border-radius: 10px;
-    padding:1.3em;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.landing-container {
+  width: 60%;
+  min-height: 80vh;
+  margin: 13vh 0;
+  background-color: rgba(118, 118, 118, 0.3);
+  border-radius: 10px;
+  padding: 1.3em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  .title {
+    font-family: $kor_hand;
+  }
+  .self-promise {
+    font-family: $kor_hand;
+    font-weight: 600;
+  }
+  .ant-picker-calendar-header {
+    margin-top: 2em;
+    padding-top: 0px;
     justify-content: flex-start;
-    .title{
-        font-family: $kor_hand;
+  }
+  .ant-picker-calendar,
+  .ant-picker-body,
+  .ant-picker-date-panel {
+    background-color: rgba($color: #000000, $alpha: 0);
+  }
+  .ant-picker-calendar-full .ant-picker-panel {
+    background-color: rgba($color: #000000, $alpha: 0);
+  }
+  .ant-picker-calendar-date-content {
+    font-family: $kor_hand;
+  }
+  .year-box {
+    font-family: $kor;
+    font-size: 0.8rem;
+    span {
+      margin-left: 5px;
     }
-    .self-promise{
-        font-family: $kor_hand;
-        font-weight: 600;
-    }
-    .ant-picker-calendar-header{
-        margin-top: 2em;
-        padding-top:0px;
-        justify-content: flex-start;
-    }
-    .ant-picker-calendar, .ant-picker-body, .ant-picker-date-panel{
-        background-color: rgba($color: #000000, $alpha: 0.0);
-    }
-    .ant-picker-calendar-full .ant-picker-panel{
-        background-color: rgba($color: #000000, $alpha: 0.0);
-    }
-    .ant-picker-calendar-date-content{
-        font-family:$kor_hand
-    }
-    .year-box{
-        font-family: $kor;
-        font-size:0.8rem;
-        span{
-            margin-left:5px;
-        }
-    }
+  }
 }
